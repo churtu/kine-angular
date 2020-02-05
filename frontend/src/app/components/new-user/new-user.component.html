@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="card mx-auto">
+        <div class="card-body">
+            <form (submit)="onSubmit()">
+                <div class="form-group text-center">
+                    <h1>Personal information</h1>
+                    <i class="far fa-address-card fa-8x"></i>
+                </div>
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <i class="fas fa-fingerprint"></i>
+                            </span>
+                        </div>
+                        <input [(ngModel)]="login.rut" name="rut" type="text" class="form-control" placeholder="Rut"
+                            aria-label="Rut" aria-describedby="addon-wrapping" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <input [(ngModel)]="login.name" name="name" type="text" class="form-control" placeholder="Name"
+                            aria-label="Name" aria-describedby="addon-wrapping" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <input [(ngModel)]="login.middleName" name="middleName" type="text" class="form-control"
+                            placeholder="Middle name" aria-label="Middle name" aria-describedby="addon-wrapping"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <input [(ngModel)]="login.username" name="lastName" type="text" class="form-control"
+                            placeholder="Lastname" aria-label="Last name" aria-describedby="addon-wrapping" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <input [(ngModel)]="login.middleLastName" name="middleLastName" type="text" class="form-control"
+                            placeholder="Middle lastname" aria-label="Last name" aria-describedby="addon-wrapping"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <input [(ngModel)]="login.age" name="age" type="text" class="form-control" placeholder="Age"
+                            aria-label="age" aria-describedby="addon-wrapping" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1"
+                            class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline1">Female</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1"
+                            class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Male</label>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="ml-auto">
+                        <button class="btn-hover color-9">Continue ></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
