@@ -43,3 +43,39 @@
     </div>
   </div>
 </div>
+
+<!--SUCCESS MODAL-->
+<div class="backdrop" [ngStyle]="{'display':successDisplay}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':successDisplay}" id="success-modal" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center font-18">
+        <h3 class="mb-20">Success!!</h3>
+        <div class="mb-30 text-center"><img src="../../../assets/success.png"></div>
+        Congratulations! You're log in.
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn-hover color-9" (click)="redirect()">Continue ></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALERT MODAL -->
+<div class="backdrop" [ngStyle]="{'display':alertDisplay}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':alertDisplay}" id="alert-modal" tabindex="-1" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content bg-danger text-white">
+      <div class="modal-body text-center">
+        <h3 class="text-white mb-15"><i class="fa fa-exclamation-triangle"></i> Error:</h3>
+        <h5>Your have the following errors:</h5>
+        <h6 *ngFor="let error of errors">
+          {{error}}
+        </h6>
+        <button type="button" class="btn-hover color-8" (click)="closeAlert()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

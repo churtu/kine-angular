@@ -1,4 +1,4 @@
-const { Login } = require('../models');
+const { Login, User } = require('../models');
 const jwt = require('jsonwebtoken');
 controller = {}
 
@@ -41,6 +41,10 @@ controller.signIn = async (req, res) => {
             const matchPassword = await login.verifyPassword(password);
             if(matchPassword){
                 const token = await jwt.sign({_id:login._id}, 'cufifa');
+                const user = await User.findOne({login_fk:login._id});
+                if(user){
+                    return res.status(200).json({token, user});
+                }
                 return res.status(200).json({token});
             }else{
                 return res.status(401).send("This user and/or password are incorrects");

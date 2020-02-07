@@ -52,7 +52,6 @@ export class SignupComponent implements OnInit {
           localStorage.setItem('token', res.token);
           this.cleanLogin();
           this.successDisplay = 'block';
-          //this.router.navigate(['/profile']);
         },
         err => {
           console.log(err);

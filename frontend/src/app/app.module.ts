@@ -8,8 +8,12 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NewUserComponent } from './components/new-user/new-user.component';
+import { InterceptorService } from './services/interceptor.service';
+import { AuthGuard } from './guards/auth.guard';
+import { AboutComponent } from './components/about/about.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,9 @@ import { NewUserComponent } from './components/new-user/new-user.component';
     SigninComponent,
     NavigationComponent,
     ProfileComponent,
-    NewUserComponent
+    NewUserComponent,
+    AboutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,14 @@ import { NewUserComponent } from './components/new-user/new-user.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

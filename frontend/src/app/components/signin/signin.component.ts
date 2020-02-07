@@ -14,19 +14,25 @@ export class SigninComponent implements OnInit {
     password: ''
   }
 
-  private errors = '';
+  private errors = [];
+
+  alertDisplay = 'none';
+  successDisplay = 'none';
+  haveuser = false;
   constructor(
     private loginService: LoginService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    this.alertDisplay = 'none';
+    this.successDisplay = 'none'
   }
 
   validateForm() {
     let isValid = true;
-    if (this.login.username == '') { isValid = false; this.errors += '\nInsert your username' }
-    if (this.login.password == '') { isValid = false; this.errors += '\nInsert your password' }
+    if (this.login.username == '') { isValid = false; this.errors.push('Insert your username') }
+    if (this.login.password == '') { isValid = false; this.errors.push('Insert your password') }
     return isValid;
   }
 
@@ -35,17 +41,34 @@ export class SigninComponent implements OnInit {
       this.loginService.login(this.login).subscribe(
         res => {
           localStorage.setItem('token', res.token);
-          this.router.navigate(['/profile']);
+          if(res.user){
+            this.haveuser = true
+          }
+          this.successDisplay = 'block';
         },
         err => {
           console.log(err);
-          alert('This user and/or password are incorrects');
+          this.errors.push('This user and/or password are incorrects');
+          this.alertDisplay = 'block';
         }
       )
     } else {
-      alert(this.errors);
-      this.errors = '';
+      this.alertDisplay = 'block';
     }
+  }
 
+  redirect(){
+    if(this.haveuser){
+      this.router.navigate(['/profile']);
+    }else{
+      this.router.navigate(['/newUser']);
+    }
+  }
+  closeAlert(){
+    this.alertDisplay = 'none';
+    this.errors = [];
+  }
+  closeSuccess(){
+    this.successDisplay = 'none';
   }
 }
