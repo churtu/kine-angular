@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { loginController, typeUserController, userController } = require('../controllers/index');
+const { loginController, typeUserController, userController, patientDataController, schedulesController } = require('../controllers/index');
 const { verifyToken } = require('../guard/verifyToken');
 
 // LOGINS ROUTES
@@ -40,5 +40,21 @@ router.route('/users/:id')
 
 router.route('/users/delete/:id')
     .delete(userController.deleteUser);
+
+router.route('/users/:id/schedules')
+    .get(userController.getSchedulesByUserId);
+// PATIENT ROUTES
+router.route('/patient-data')
+    .get(patientDataController.getPatientsData)
+    .post(patientDataController.addPatientData);
+
+router.route('/patient-data/:id')
+    .get(patientDataController.getPatientData)
+    .delete(patientDataController.deletePatientData);
+
+// SCHEDULE ROUTES
+router.route('/schedule')
+    .get(schedulesController.getAllSchedules)
+    .post(schedulesController.addSchedule);
 
 module.exports = router;

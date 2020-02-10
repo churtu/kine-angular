@@ -14,4 +14,8 @@ export class UsersService {
   create(user){
     return this.http.post<any>(this.URI+'users',user);
   }
+
+  getSchedulesByUserId(id){
+    return this.http.get<any>(`${this.URI}users/${id}/schedules`);
+  }
 }

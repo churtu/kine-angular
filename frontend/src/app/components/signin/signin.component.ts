@@ -59,7 +59,7 @@ export class SigninComponent implements OnInit {
 
   redirect(){
     if(this.haveuser){
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/home']);
     }else{
       this.router.navigate(['/newUser']);
     }

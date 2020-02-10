@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 body{
-    background: url(assets/bg-index.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: url(assets/bg-index.png);
     font-family: 'Raleway', sans-serif;
     background-position: unset;
 }
@@ -96,3 +95,6 @@ body{
 
 
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

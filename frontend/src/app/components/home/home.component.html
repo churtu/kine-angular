@@ -13,36 +13,43 @@
    <a class="bg_links logo"></a>
 </div>
 <!-- end about -->
+
+
+
+<div class="row justify-content-center options">
    
-   <div class="content">
       <!--PROFILE -->
       <div class="card" routerLink="/profile">
-            <div class="icon"><i class="fas fa-user-md fa-3x"></i></div>
-            <p class="title">Profile</p>
-            <p class="text">Click to see or edit your profile page.</p>       
+         <div class="icon"><i class="fas fa-user-md fa-3x"></i></div>
+         <p class="title">Realizar evaluación</p>
+         <p class="text">Registra los datos de la evaluación</p>
       </div>
       <!-- end card -->
       <!-- card -->
       <div class="card">
-         
-            <div class="icon"><i class="material-icons md-36">favorite_border</i></div>
-            <p class="title">Favourites</p>
-            <p class="text">Check all your favourites in one place.</p>
-         
-      </div>
-      <!-- end card -->
-      <!-- card -->
-      <div class="card">
-         
-            <div class="icon"><i class="material-icons md-36">alternate_email</i></div>
-            <p class="title">Contacts</p>
-            <p class="text">Add or change your contacts and links.</p>
-         
-      </div>
-      <!-- end card -->
-   
 
-   
+         <div class="icon"><i class="fas fa-users fa-3x"></i></div>
+         <p class="title">Todos mis pacientes</p>
+         <p class="text">Revista todos tus pacientes.</p>
+
+      </div>
+      <!-- end card -->
+      <!-- card -->
+      <div class="card">
+
+         <div class="icon"><i class="fas fa-user-check fa-2x"></i></div>
+         <p class="title">Atender</p>
+         <p class="text">Realizar atención de paciente.</p>
+
+      </div>
+      <!-- end card -->
+
+
 </div>
-
-
+<div class="row">
+   <div class="card-body">
+      <h5><i class="fas fa-user-clock fa-2x"></i> Mis pacientes de hoy</h5>
+      <hr>
+      <app-data-table></app-data-table>
+   </div>
+</div>

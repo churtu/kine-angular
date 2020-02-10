@@ -3,7 +3,7 @@
     <div class="card-body">
       <form (submit)="onSubmit()">
         <div class="form-group text-center">
-          <h1>Welcome! SignUp</h1>
+          <h1>Bienvenido! Crea tu cuenta</h1>
           <i class="fas fa-user-circle fa-8x"></i>
         </div>
         <div class="form-group">
@@ -42,12 +42,12 @@
         <hr>
         <div class="row align-items-center">
           <div class="col-md-5">
-            <a href="#">Have an account?</a>
+            <a routerLink="/signin">Ya tienes una cuenta?</a>
             <hr>
-            <a href="#">Forgot your password?</a>
+            <a href="#">Olvidaste tu password?</a>
           </div>
           <div class="col-md-7">
-            <button class="btn-hover color-9">Continue ></button>
+            <button class="btn-hover color-9">Continuar ></button>
           </div>
         </div>
       </form>
@@ -64,10 +64,10 @@
       <div class="modal-body text-center font-18">
         <h3 class="mb-20">Success!!</h3>
         <div class="mb-30 text-center"><img src="../../../assets/success.png"></div>
-        Congratulations! Now we need your personal information
+        Felicitaciones! En el siguiente paso, deberás ingresar tus datos personales.
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn-hover color-9" (click)="closeSuccess()" routerLink="/newUser">Next step</button>
+        <button type="button" class="btn-hover color-9" (click)="closeSuccess()" routerLink="/newUser">Siguiente paso ></button>
       </div>
     </div>
   </div>
@@ -81,11 +81,11 @@
     <div class="modal-content bg-danger text-white">
       <div class="modal-body text-center">
         <h3 class="text-white mb-15"><i class="fa fa-exclamation-triangle"></i> Error:</h3>
-        <h5>Your have the following errors:</h5>
+        <h5>Se detectaron los siguientes errores:</h5>
         <h6 *ngFor="let error of errors">
           {{error}}
         </h6>
-        <button type="button" class="btn-hover color-8" (click)="closeAlert()">Ok</button>
+        <button type="button" class="btn-hover color-8" (click)="closeAlert()">Volver</button>
       </div>
     </div>
   </div>

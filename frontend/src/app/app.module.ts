@@ -14,6 +14,10 @@ import { InterceptorService } from './services/interceptor.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap/';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { MaterialModule } from './material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,13 +28,17 @@ import { HomeComponent } from './components/home/home.component';
     ProfileComponent,
     NewUserComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuard,
