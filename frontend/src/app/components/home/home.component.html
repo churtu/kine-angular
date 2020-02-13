@@ -17,39 +17,33 @@
 
 
 <div class="row justify-content-center options">
-   
-      <!--PROFILE -->
-      <div class="card" routerLink="/profile">
-         <div class="icon"><i class="fas fa-user-md fa-3x"></i></div>
-         <p class="title">Realizar evaluación</p>
-         <p class="text">Registra los datos de la evaluación</p>
-      </div>
-      <!-- end card -->
-      <!-- card -->
-      <div class="card">
 
-         <div class="icon"><i class="fas fa-users fa-3x"></i></div>
-         <p class="title">Todos mis pacientes</p>
-         <p class="text">Revista todos tus pacientes.</p>
-
-      </div>
-      <!-- end card -->
-      <!-- card -->
-      <div class="card">
-
-         <div class="icon"><i class="fas fa-user-check fa-2x"></i></div>
-         <p class="title">Atender</p>
-         <p class="text">Realizar atención de paciente.</p>
-
-      </div>
-      <!-- end card -->
-
-
-</div>
-<div class="row">
-   <div class="card-body">
-      <h5><i class="fas fa-user-clock fa-2x"></i> Mis pacientes de hoy</h5>
-      <hr>
-      <app-data-table></app-data-table>
+   <!--PROFILE -->
+   <div class="card" routerLink="/evaluation">
+      <div class="icon"><i class="fas fa-user-md fa-3x"></i></div>
+      <p class="title">Realizar evaluación</p>
+      <p class="text">Busca un paciente y realiza una evaluación</p>
    </div>
+   <!-- end card -->
+   <!-- card -->
+   <div class="card" routerLink="/my-patients">
+
+      <div class="icon"><i class="fas fa-users fa-3x"></i></div>
+      <p class="title">Todos mis pacientes</p>
+      <p class="text">Revista todos tus pacientes</p>
+
+   </div>
+   <!-- end card -->
+   <!-- card -->
+   <div class="card" routerLink="/medical-care">
+      <div class="icon"><i class="fas fa-book-reader fa-3x"></i></div>
+      <p class="title">Agenda</p>
+      <p class="text">Revista tu agendamiento de pacientes</p>
+
+   </div>
+   <!-- end card -->
+
+
 </div>
+
+<app-data-table></app-data-table>

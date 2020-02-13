@@ -8,41 +8,97 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a type="button" class="nav-link" routerLink="/about">About</a>
+                    <button class="raise" routerLink="/about">
+                        <a type="button" class="nav-link" >
+                            About
+                        </a>
+                    </button>
                 </li>
                 <ng-container *ngIf="this.loginService.isLogged()">
                     <li class="nav-item">
-                        <a type="button" class="nav-link" routerLink="/home">
-                            Home
-                        </a>
+                        <button class="raise"  routerLink="/home">
+                            <a type="button" class="nav-link">
+                                Home
+                            </a>
+                        </button>
+
+                    </li>
+                    <li class="nav-item">
+                        <button class="raise" routerLink="/evaluation">
+                            <a type="button" class="nav-link" >
+                                Realizar evaluacion
+                            </a>
+                        </button>
+
+                    </li>
+                    <li class="nav-item">
+                        <button class="raise">
+                            <a type="button" class="nav-link" routerLink="/medical-care">
+                                Atender
+                            </a>
+                        </button>
+
+                    </li>
+                    <li class="nav-item">
+                        <button class="raise" routerLink="/add-patient">
+                            <a type="button" class="nav-link" >
+                                Agregar paciente
+                            </a>
+                        </button>
                     </li>
                 </ng-container>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <ng-container *ngIf="!this.loginService.isLogged(); else logged">
                     <li class="nav-item">
-                        <a type="button" class="nav-link" routerLink="/signup">
-                            Sign up
-                        </a>
+                        <button class="raise">
+                            <a type="button" class="nav-link" routerLink="/signup">
+                                Sign up
+                            </a>
+                        </button>
+
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="nav-link" routerLink="/signin">
-                            Log in
-                        </a>
+                        <button class="raise">
+                            <a type="button" class="nav-link" routerLink="/signin">
+                                Log in
+                            </a>
+                        </button>
+
                     </li>
                 </ng-container>
                 <ng-template #logged>
                     <li class="nav-item">
-                        <a type="button" class="nav-link" routerLink="/profile">
-                            Profile
-                        </a>
+                        <button class="raise" (click)="showUserName()">
+                            <div class="container">
+                                <a type="button" class="nav-link">
+                                    <div class="row">
+                                        <i class="fas fa-arrow-left" *ngIf="this.nameDisplay=='none'"></i>
+                                        <i class="fas fa-arrow-right" [ngStyle]="{'display':nameDisplay}"></i>
+                                        <div class="col">
+                                            <i class="fas fa-user-cog ml-1"></i>
+                                            <span class="float-right ml-1" [ngStyle]="{'display':nameDisplay}">
+
+                                                {{user.firstName}} {{user.middleName}}
+                                                {{user.lastName}} {{user.middleLastName}}
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a type="button" class="nav-link" [ngStyle]="{'display':nameDisplay}"
+                                    (click)="loginService.logout(); cleanUser();" style="cursor: pointer;"
+                                    routerLinkActive="active">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Logout
+                                </a>
+
+                            </div>
+                        </button>
+
+
                     </li>
-                    <li class="nav-item">
-                        <a type="button" class="nav-link" (click)="loginService.logout()" style="cursor: pointer;"
-                            routerLinkActive="active">
-                            Log out
-                        </a>
-                    </li>
+
                 </ng-template>
             </ul>
         </div>

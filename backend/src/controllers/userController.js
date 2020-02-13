@@ -2,7 +2,7 @@ const { User } = require('../models');
 const { ObjectId } = require('mongoose').Types;
 controller = {}
 
-controller.getAll = async (req, res) => {
+controller.getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).json(users);
@@ -93,6 +93,76 @@ controller.getSchedulesByUserId = async (req, res) => {
     } catch (error) {
         console.log(error);
         return res.status(401);
+    }
+}
+
+// Consulta que obtiene el nombre, el email, el genero, la especializacion, typeuser
+controller.getSpecializationByKineId = async (req, res) =>{
+    try {
+        const data = await User.aggregate(
+            [
+                {
+                    $match: {
+                        _id: ObjectId("5e3da73ef3d6891cd4bcfa1c")
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'kine_datas',
+                        localField: '_id',
+                        foreignField: 'user_fk',
+                        as: 'kine_data'
+                    }
+                },
+                {
+                    $unwind: '$kine_data'
+                },
+                {
+                    $lookup: {
+                        from: 'specializations',
+                        localField: 'kine_data.specialization_fk',
+                        foreignField: '_id',
+                        as: 'specialization'
+                    }
+                },
+                {
+                    $unwind: '$specialization'
+                },
+                {
+                    $lookup: {
+                        from: 'typeusers',
+                        localField: 'typeUser_fk',
+                        foreignField: '_id',
+                        as: 'typeUser'
+                    }
+                },
+                {
+                    $unwind: '$typeUser'
+                },
+                {
+                    $project: {
+                        firstName:'firstName',
+                        lastName: 'lastName',
+                        email: 'email',
+                        gender: 'gender',
+                        specialization: '$specialization.description',
+                        typeuser: '$typeUser.description'
+                    }
+                }
+            ]
+        );
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(402).send(error);
+    }  
+}
+
+controller.getUserByLoginId = async (req, res) =>{
+    try {
+        const user = await User.findOne({login_fk:req.params.login_id});
+        return res.status(200).json(user)
+    } catch (error) {
+        return res.status(401).send(error);
     }
 }
 

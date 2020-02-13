@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -22,8 +21,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private router: Router
-  ) {  }
+  ) { }
 
   ngOnInit() {
     this.successDisplay = 'none';
@@ -61,7 +59,7 @@ export class SignupComponent implements OnInit {
         }
       )
     } else {
-      
+
       this.alertDisplay = 'block';
     }
 
@@ -71,13 +69,13 @@ export class SignupComponent implements OnInit {
     this.successDisplay = 'block';
   }
 
-  alertModal(){
+  alertModal() {
     this.alertDisplay = 'block';
   }
 
-  closeAlert(){
+  closeAlert() {
     this.alertDisplay = 'none';
-    this.errors=[];
+    this.errors = [];
   }
 
   closeSuccess() {

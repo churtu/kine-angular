@@ -1,0 +1,197 @@
+<div class="row">
+    <div class="card mx-auto">
+        <div class="card-body">
+            <form (submit)="onSubmit()">
+                <div class="form-group text-center">
+                    <h1>Nuevo paciente</h1>
+                    <i class="far fa-address-card fa-8x"></i>
+                </div>
+
+                <div class="form-group">
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-auto">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input [(ngModel)]="user.gender" value="Female" type="radio" id="customRadioInline1"
+                                    name="customRadioInline1" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline1">Female</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input [(ngModel)]="user.gender" value="Male" type="radio" id="customRadioInline2"
+                                    name="customRadioInline1" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">Male</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-fingerprint"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.rut" name="rut" type="text" class="form-control"
+                                    placeholder="Rut" aria-label="Rut" aria-describedby="addon-wrapping" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.age" name="age" type="text" class="form-control"
+                                    placeholder="Age" aria-label="age" aria-describedby="addon-wrapping" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.firstName" name="firstName" type="text" class="form-control"
+                                    placeholder="Name" aria-label="Name" aria-describedby="addon-wrapping" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.middleName" name="middleName" type="text" class="form-control"
+                                    placeholder="Middle name" aria-label="Middle name" aria-describedby="addon-wrapping"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.lastName" name="lastName" type="text" class="form-control"
+                                    placeholder="Lastname" aria-label="Last name" aria-describedby="addon-wrapping"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.middleLastName" name="middleLastName" type="text"
+                                    class="form-control" placeholder="Middle lastname" aria-label="Last name"
+                                    aria-describedby="addon-wrapping" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-at"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.email" name="email" type="text" class="form-control"
+                                    placeholder="E-mail" aria-label="email" aria-describedby="addon-wrapping" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-phone"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="user.phone" name="phone" type="text" class="form-control"
+                                    placeholder="Phone" aria-label="phone" aria-describedby="addon-wrapping" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">
+                                        <i class="fas fa-hospital"></i>
+                                    </span>
+                                </div>
+                                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                                <select class="prevition custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                    <option selected>Prevision</option>
+                                    <option value="1">Fonasa A</option>
+                                    <option value="2">Fonasa B</option>
+                                    <option value="3">Isapre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="diagnostic btn-hover color-5">Generar diagnostico</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="ml-auto">
+                        <button class="btn-hover color-9">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':displayModalDiagnostic}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':displayModalDiagnostic}" id="success-modal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center font-18">
+                <h3 class="mb-20">Diagnosico</h3>
+                <div class="mb-30 text-center"></div>
+                Ingresar los datos del diagnostico aqui...
+            </div>
+            <div class="modal-footer justify-content-between">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn-hover color-5" (click)="closeDiagnostic()">Cancelar <i
+                                class="fas fa-ban"></i></button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn-hover color-5" (click)="redirect()">Guardar <i
+                                class="fas fa-check-circle"></i></button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

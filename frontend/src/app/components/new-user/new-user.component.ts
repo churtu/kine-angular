@@ -19,6 +19,7 @@ export class NewUserComponent implements OnInit {
     middleLastName: '',
     phone: '',
     email: '',
+    address: '',
     gender: '',
     specialization: '',
     typeUser_fk: ''
@@ -32,35 +33,36 @@ export class NewUserComponent implements OnInit {
     private typeUserService: TypeUserService,
     private usersService: UsersService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.successDisplay = 'none';
     this.alertDisplay = 'none'
   }
 
-  validateForm(){
+  validateForm() {
     let isValid = true;
-    if(this.user.rut == ''){isValid=false; this.errors.push('- Insert your rut');}
-    if(this.user.age == 0){isValid=false; this.errors.push('- Insert your age');}
-    if(this.user.firstName == ''){isValid=false; this.errors.push('- Insert your first name');}
-    if(this.user.middleName == ''){isValid=false; this.errors.push('- Insert your middle name');}
-    if(this.user.lastName == ''){isValid=false; this.errors.push('- Insert your last middle Last name');}
-    if(this.user.middleLastName == ''){isValid=false; this.errors.push('- Insert your middle last name');}
-    if(this.user.phone == ''){isValid=false; this.errors.push('- Insert your phone');}
-    if(this.user.email == ''){isValid=false; this.errors.push('- Insert your email');}
-    if(this.user.gender == ''){isValid=false; this.errors.push('- Insert your gender');}
-    if(this.user.specialization == ''){isValid=false; this.errors.push('- Insert your specialization');}
+    if (this.user.rut == '') { isValid = false; this.errors.push('- Rut'); }
+    if (this.user.age == 0) { isValid = false; this.errors.push('- Edad'); }
+    if (this.user.firstName == '') { isValid = false; this.errors.push('- Nombre'); }
+    if (this.user.middleName == '') { isValid = false; this.errors.push('- Segundo nombre'); }
+    if (this.user.lastName == '') { isValid = false; this.errors.push('- Apellido'); }
+    if (this.user.middleLastName == '') { isValid = false; this.errors.push('- Segundo apellido'); }
+    if (this.user.phone == '') { isValid = false; this.errors.push('- Teléfono'); }
+    if (this.user.email == '') { isValid = false; this.errors.push('- E-mail'); }
+    if (this.user.gender == '') { isValid = false; this.errors.push('- Genero'); }
+    if (this.user.specialization == '') { isValid = false; this.errors.push('Especialización'); }
+    if (this.user.address == '') { isValid = false; this.errors.push('- Dirección') }
     return isValid;
   }
 
   onSubmit() {
     this.typeUserService.getByDesc('kine').subscribe(
       res => {
-        if(this.validateForm()){
+        if (this.validateForm()) {
           this.user.typeUser_fk = res._id;
           this.createUser();
-        }else{
+        } else {
           this.alertDisplay = 'block';
         }
       },
@@ -79,18 +81,18 @@ export class NewUserComponent implements OnInit {
       },
       err => {
         console.log(err);
-        
+
       }
     );
   }
 
-  closeSuccess(){
+  closeSuccess() {
     this.successDisplay = 'none';
   }
 
-  closeAlert(){
+  closeAlert() {
     this.alertDisplay = 'none';
-    this.errors=[];
+    this.errors = [];
   }
 
 }

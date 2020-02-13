@@ -1,6 +1,5 @@
 table {
     width: 100%;
-    
   }
   
   tr.example-detail-row {
@@ -8,7 +7,9 @@ table {
   }
   
   tr.example-element-row:not(.example-expanded-row):hover {
-    background: #777;
+    background: #11998e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #30dd8a, #2bb673);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #30dd8a, #2bb673); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
   
   tr.example-element-row:not(.example-expanded-row):active {
@@ -47,6 +48,15 @@ table {
     opacity: 0.5;
   }
   
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .mat-form-field {
+  font-size: 14px;
+  width: 90%;
+}
+
 
   .btn{
     min-width: 10rem;

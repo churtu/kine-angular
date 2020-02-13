@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatSort } from '@angular/material/sort';
 
 export interface PeriodicElement {
   Nombre: string;
@@ -98,8 +99,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./data-table.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ]
@@ -107,11 +108,18 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class DataTableComponent implements OnInit {
   displayedColumns = ['Nombre', 'weight', 'symbol', 'position'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatPaginator,null) paginator: MatPaginator;
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor() { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

@@ -2,7 +2,7 @@ const { Login, User } = require('../models');
 const jwt = require('jsonwebtoken');
 controller = {}
 
-controller.getAll = async (req, res) => {
+controller.getAllLogins = async (req, res) => {
     try {
         const logins = await Login.find();
         if (logins.length != 0) {
@@ -71,7 +71,7 @@ controller.getLogin = async (req, res) => {
     }
 }
 
-controller.delete = async (req, res) => {
+controller.deleteLogin = async (req, res) => {
     try {
         const deleted = await Login.findByIdAndDelete(req.params.id);
         if(deleted){
@@ -85,7 +85,7 @@ controller.delete = async (req, res) => {
     }
 }
 
-controller.update = async (req, res) => {
+controller.updateLogin = async (req, res) => {
     res.send('Update login');
 }
 

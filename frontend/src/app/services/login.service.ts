@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class LoginService {
 
   isLogged(){
     return !!localStorage.getItem('token');
+  }
+
+  getLoginId(){
+    return jwt_decode(this.getToken());
   }
 }

@@ -18,6 +18,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap/';
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EvaluationComponent } from './components/evaluation/evaluation.component';
+import { MedicalCareComponent } from './components/medical-care/medical-care.component';
+import { MyPatientsComponent } from './components/my-patients/my-patients.component';
+import { AddPatientComponent } from './components/add-patient/add-patient.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewUserComponent,
     AboutComponent,
     HomeComponent,
-    DataTableComponent
+    DataTableComponent,
+    EvaluationComponent,
+    MedicalCareComponent,
+    MyPatientsComponent,
+    AddPatientComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

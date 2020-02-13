@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
+
   private login = {
     username: '',
     password: ''
@@ -22,12 +23,14 @@ export class SigninComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router
+
   ) { }
 
   ngOnInit() {
     this.alertDisplay = 'none';
     this.successDisplay = 'none'
   }
+
 
   validateForm() {
     let isValid = true;
@@ -41,8 +44,8 @@ export class SigninComponent implements OnInit {
       this.loginService.login(this.login).subscribe(
         res => {
           localStorage.setItem('token', res.token);
-          if(res.user){
-            this.haveuser = true
+          if (res.user) {
+            this.haveuser = true;
           }
           this.successDisplay = 'block';
         },
@@ -57,18 +60,19 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  redirect(){
-    if(this.haveuser){
+
+  redirect() {
+    if (this.haveuser) {
       this.router.navigate(['/home']);
-    }else{
+    } else {
       this.router.navigate(['/newUser']);
     }
   }
-  closeAlert(){
+  closeAlert() {
     this.alertDisplay = 'none';
     this.errors = [];
   }
-  closeSuccess(){
+  closeSuccess() {
     this.successDisplay = 'none';
   }
 }

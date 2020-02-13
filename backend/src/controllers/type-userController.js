@@ -1,7 +1,7 @@
 const { TypeUser } = require('../models');
 controller = {}
 
-controller.getAll = async (req, res) => {
+controller.getAllTypeUsers = async (req, res) => {
     try {
         const types = await TypeUser.find();
         res.status(200).json(types);
@@ -10,7 +10,7 @@ controller.getAll = async (req, res) => {
     }
 }
 
-controller.getTypeById = async (req, res) => {
+controller.getTypeUserById = async (req, res) => {
     try {
         const type = await TypeUser.findById(req.params.id);
         if (type) {
@@ -21,7 +21,7 @@ controller.getTypeById = async (req, res) => {
     }
 }
 
-controller.addType = async (req, res) => {
+controller.addTypeUser = async (req, res) => {
     try {
         const { description } = req.body;
         const newType = new TypeUser({ description });
@@ -33,7 +33,7 @@ controller.addType = async (req, res) => {
 
 }
 
-controller.deleteType = async (req, res) => {
+controller.deleteTypeUser = async (req, res) => {
     try {
         const type = await TypeUser.findOne({ _id: req.params.id });
         if (type) {
@@ -45,7 +45,7 @@ controller.deleteType = async (req, res) => {
     }
 }
 
-controller.getTypeByDesc = async (req, res) => {
+controller.getTypeUserByDesc = async (req, res) => {
     try {
         const type = await TypeUser.findOne({ description: req.params.desc });
         return res.status(200).json(type);
