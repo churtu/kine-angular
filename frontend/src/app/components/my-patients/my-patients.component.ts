@@ -1,97 +1,27 @@
+import { PatientService } from './../../services/patient.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSort } from '@angular/material/sort';
+import { AgendaService } from '../../services/agenda.service';
+import { LoginService } from '../../services/login.service';
+import { UsersService } from '../../services/users.service';
 
 export interface PeriodicElement {
   Nombre: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  description: string;
+  Rut: string;
+  Genero: string;
+  Edad: number;
+  Direccion: string;
+  Telefono: string;
+  Diagnostico: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    position: 1,
-    Nombre: 'Hydrogen',
-    weight: 1.0079,
-    symbol: 'H',
-    description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`
-  }, {
-    position: 2,
-    Nombre: 'Helium',
-    weight: 4.0026,
-    symbol: 'He',
-    description: `Helium is a chemical element with symbol He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`
-  }, {
-    position: 3,
-    Nombre: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  }, {
-    position: 4,
-    Nombre: 'Beryllium',
-    weight: 9.0122,
-    symbol: 'Be',
-    description: `Beryllium is a chemical element with symbol Be and atomic number 4. It is a
-        relatively rare element in the universe, usually occurring as a product of the spallation of
-        larger atomic nuclei that have collided with cosmic rays.`
-  }, {
-    position: 5,
-    Nombre: 'Boron',
-    weight: 10.811,
-    symbol: 'B',
-    description: `Boron is a chemical element with symbol B and atomic number 5. Produced entirely
-        by cosmic ray spallation and supernovae and not by stellar nucleosynthesis, it is a
-        low-abundance element in the Solar system and in the Earth's crust.`
-  }, {
-    position: 6,
-    Nombre: 'Carbon',
-    weight: 12.0107,
-    symbol: 'C',
-    description: `Carbon is a chemical element with symbol C and atomic number 6. It is nonmetallic
-        and tetravalent—making four electrons available to form covalent chemical bonds. It belongs
-        to group 14 of the periodic table.`
-  }, {
-    position: 7,
-    Nombre: 'Nitrogen',
-    weight: 14.0067,
-    symbol: 'N',
-    description: `Nitrogen is a chemical element with symbol N and atomic number 7. It was first
-        discovered and isolated by Scottish physician Daniel Rutherford in 1772.`
-  }, {
-    position: 8,
-    Nombre: 'Oxygen',
-    weight: 15.9994,
-    symbol: 'O',
-    description: `Oxygen is a chemical element with symbol O and atomic number 8. It is a member of
-         the chalcogen group on the periodic table, a highly reactive nonmetal, and an oxidizing
-         agent that readily forms oxides with most elements as well as with other compounds.`
-  }, {
-    position: 9,
-    Nombre: 'Fluorine',
-    weight: 18.9984,
-    symbol: 'F',
-    description: `Fluorine is a chemical element with symbol F and atomic number 9. It is the
-        lightest halogen and exists as a highly toxic pale yellow diatomic gas at standard
-        conditions.`
-  }, {
-    position: 10,
-    Nombre: 'Neon',
-    weight: 20.1797,
-    symbol: 'Ne',
-    description: `Neon is a chemical element with symbol Ne and atomic number 10. It is a noble gas.
-        Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about
-        two-thirds the density of air.`
-  },
-];
+
+let DATA: PeriodicElement[] = [
+
+]
+
 @Component({
   selector: 'app-my-patients',
   templateUrl: './my-patients.component.html',
@@ -105,15 +35,26 @@ const ELEMENT_DATA: PeriodicElement[] = [
   ]
 })
 export class MyPatientsComponent implements OnInit {
-  displayedColumns = ['Nombre', 'weight', 'symbol', 'position'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  private user: PeriodicElement[];
+  displayedColumns = ['Nombre', 'Rut', 'Genero', 'Edad', 'Direccion', 'Telefono'];
+  dataSource = new MatTableDataSource<PeriodicElement>();
   @ViewChild(MatPaginator, null) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  constructor() { }
+
+
+  constructor(
+    private loginService: LoginService,
+    private usersService: UsersService,
+    private agendaService: AgendaService,
+    private PatientService: PatientService
+  ) { }
 
   ngOnInit() {
+    DATA=[];
+    this.getLoggedUser();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
   }
 
   applyFilter(event: Event) {
@@ -121,5 +62,39 @@ export class MyPatientsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  getLoggedUser() {
+    const { _id } = this.loginService.getLoginId();
+    this.usersService.getUserByLoginId(_id).subscribe(
+      res => {
+        this.user = res;
+        this.getAgendasByKineId(res._id);
+      },
+      err => console.log(err)
+    );
+  }
 
+  getAgendasByKineId(id) {
+    this.agendaService.getAllAgendasByKineId(id).subscribe(
+      res => {
+        res.forEach(element => {
+          this.PatientService.getTreatmentsByPatientId(element.patient_fk).subscribe(
+            res => {
+              DATA.push({
+                Nombre: element.patient[0].firstName,
+                Rut: element.patient[0].rut,
+                Genero: element.patient[0].gender,
+                Edad: element.patient[0].age,
+                Direccion: element.patient[0].address,
+                Telefono: element.patient[0].phone,
+                Diagnostico: res[0].treatment[0].diagnostic
+              })
+              this.dataSource = new MatTableDataSource<PeriodicElement>(DATA);
+            },
+            err => console.log(err)
+          );
+        });
+      },
+      err => console.log(err)
+    )
+  }
 }

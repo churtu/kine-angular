@@ -10,11 +10,10 @@ export class UsersService {
 
   URI = 'http://localhost:3000/api/'
   constructor(
-    private http: HttpClient,
-    private loginService: LoginService
+    private http: HttpClient
   ) { }
 
-  create(user) {
+  addUser(user) {
     return this.http.post<any>(this.URI + 'users', user);
   }
 
@@ -29,6 +28,7 @@ export class UsersService {
   getUserByLoginId(id){
     return this.http.get<any>(`${this.URI}users/byLoginId/${id}`);
   }
+
 
   
 }

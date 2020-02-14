@@ -44,8 +44,8 @@ controller.addUser = async (req, res) => {
         if (!user) {
             const newUser = new User(req.body);
             newUser.login_fk = req.loginId;
-            await newUser.save();
-            return res.status(200).json(newUser);
+            created = await newUser.save();
+            return res.status(200).json(created);
         } else {
             return res.status(401).send('This user already exists');
         }

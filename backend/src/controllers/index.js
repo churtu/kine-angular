@@ -8,5 +8,6 @@ module.exports = {
     treatmentController: require('../controllers/treatmentController'),
     sessionController: require('../controllers/sessionController'),
     typeEvaluationController: require('../controllers/typeEvaluationController'),
-    evaluationController: require('../controllers/evaluationController')
+    evaluationController: require('../controllers/evaluationController'),
+    agendaController: require('../controllers/agendaController')
 }

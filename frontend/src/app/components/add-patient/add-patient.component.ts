@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-add-patient',
@@ -7,33 +9,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPatientComponent implements OnInit {
 
+  successDisplay = 'none';
+  private previtions: String[] = ['Fonasa A', 'Fonsasa B', 'Isapre'];
   private user = {
     rut: '',
-    age: 0,
+    age: null,
     firstName: '',
     middleName: '',
     lastName: '',
     middleLastName: '',
     phone: '',
     email: '',
+    address: '',
     gender: '',
-    specialization: '',
-    typeUser_fk: ''
+    typeUser_fk: '5e3f14e346e320175c47272e'
   }
 
-  displayModalDiagnostic = 'none';
-  constructor() { }
+  private patient_data = {
+    prevition: 'aa',
+    user_fk: ''
+  }
+
+  constructor(
+    private usersService: UsersService,
+    private patientService: PatientService
+  ) { }
 
   ngOnInit() {
-    this.displayModalDiagnostic = 'none';
+    this.successDisplay = 'none';
   }
 
+  
   onSubmit() {
-    this.displayModalDiagnostic = 'block';
-    console.log('ok');
+    this.usersService.addUser(this.user).subscribe(
+      res => {
+        this.patient_data.user_fk = res._id;
+        this.patientService.addPatient_data(this.patient_data).subscribe(
+          res => { 
+            this.successDisplay = 'block'
+          },
+          err => console.log(err)
+        )
+        console.log(res);
+      },
+      err => console.log(err)
+    )
   }
 
-  closeDiagnostic() {
-    this.displayModalDiagnostic = 'none';
+  modal(){
+    this.successDisplay = 'block';
   }
+  closeSuccess(){
+    this.successDisplay = 'none';
+  }
+
+
 }

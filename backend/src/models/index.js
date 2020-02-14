@@ -8,5 +8,6 @@ module.exports = {
     Treatment: require('./Treatment'),
     Session: require('./Session'),
     Type_evaluation: require('./Type_evaluation'),
-    Evaluation: require('./Evaluation')
+    Evaluation: require('./Evaluation'),
+    Agenda: require('./Agenda')
 }

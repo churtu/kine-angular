@@ -9,7 +9,8 @@ const {
     treatmentController,
     sessionController,
     typeEvaluationController,
-    evaluationController
+    evaluationController,
+    agendaController
 } = require('../controllers/index');
 const { verifyToken } = require('../guard/verifyToken');
 
@@ -60,7 +61,7 @@ router.route('/users/:id/schedules')
 router.route('/users/byLoginId/:login_id')
     .get(userController.getUserByLoginId);
     
-// PATIENT ROUTES ----------------------------------------------------
+// PATIENT_DATA ROUTES ----------------------------------------------------
 router.route('/patient-data')
     .get(patientDataController.getPatientsData)
     .post(patientDataController.addPatientData);
@@ -69,6 +70,11 @@ router.route('/patient-data/:id')
     .get(patientDataController.getPatientData)
     .delete(patientDataController.deletePatientData);
 
+router.route('/patient-data/byUserId/:id')
+    .get(patientDataController.getPatientDataByUserId);
+
+router.route('/patient-data/treatmentByPatientId/:id')
+    .get(patientDataController.getDiagnosticByPatientId);
 // SPECIALIZATION ROUTES ---------------------------------------------
 router.route('/specializations')
     .get(specializationController.getAllSpecializations)
@@ -96,6 +102,7 @@ router.route('/treatments/:id')
     .get(treatmentController.getTreatment)
     .delete(treatmentController.deleteTreatment);
 
+
 // SESSIONS ROUTES --------------------------------------------------
 router.route('/sessions')
     .get(sessionController.getAllSessions)
@@ -122,5 +129,17 @@ router.route('/evaluations')
 router.route('/evaluations/:id')
     .get(evaluationController.getEvaluation)
     .delete(evaluationController.deleteEvaluation);
+
+// AGENDA ROUTES
+router.route('/agenda')
+    .get(agendaController.getAllAgendas)
+    .post(agendaController.addAgenda);
+
+    router.route('/agenda/:id')
+    .get(agendaController.getAgenda)
+    .delete(agendaController.deleteAgenda);
+ 
+router.route('/agenda/kine/:id')
+    .get(agendaController.getAgendaDataByKineId);
 
 module.exports = router;

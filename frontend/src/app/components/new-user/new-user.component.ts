@@ -74,7 +74,7 @@ export class NewUserComponent implements OnInit {
   }
 
   createUser() {
-    this.usersService.create(this.user).subscribe(
+    this.usersService.addUser(this.user).subscribe(
       res => {
         console.log(res);
         this.successDisplay = 'block';

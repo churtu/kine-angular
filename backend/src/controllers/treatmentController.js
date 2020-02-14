@@ -38,4 +38,5 @@ controller.deleteTreatment = async (req, res) => {
     }
 }
 
+
 module.exports = controller;
