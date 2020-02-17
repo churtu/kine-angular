@@ -21,7 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvaluationComponent } from './components/evaluation/evaluation.component';
 import { MedicalCareComponent } from './components/medical-care/medical-care.component';
 import { MyPatientsComponent } from './components/my-patients/my-patients.component';
-import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
@@ -38,7 +37,6 @@ import { FooterComponent } from './components/footer/footer.component';
     EvaluationComponent,
     MedicalCareComponent,
     MyPatientsComponent,
-    AddPatientComponent,
     FooterComponent
   ],
   imports: [

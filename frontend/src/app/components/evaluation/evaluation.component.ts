@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-evaluation',
@@ -7,9 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvaluationComponent implements OnInit {
 
-  constructor() { }
+  private warningDisplay='none';
+  private successDisplay='none'
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.warningDisplay='none';
+    this.successDisplay='none'
   }
 
+  onSubmit(){
+    this.showWarning();
+  }
+  showWarning(){
+    this.warningDisplay='block';
+  }
+  closeWarning(){
+    this.warningDisplay='none';
+  }
+
+  showSuccess(){
+    this.successDisplay='block';
+  }
+
+  closeSuccess(){
+    this.successDisplay='none';
+  }
+
+  redirect(){
+    this.router.navigate(['/home']);
+  }
 }

@@ -10,7 +10,6 @@ import { EvaluationComponent } from './components/evaluation/evaluation.componen
 import { MedicalCareComponent } from './components/medical-care/medical-care.component';
 import { MyPatientsComponent } from './components/my-patients/my-patients.component';
 import { AuthGuard } from './guards/auth.guard';
-import { AddPatientComponent } from './components/add-patient/add-patient.component';
 
 const routes: Routes = [
   {
@@ -55,10 +54,6 @@ const routes: Routes = [
   {
     path: 'my-patients',
     component: MyPatientsComponent
-  },
-  {
-    path: 'add-patient',
-    component: AddPatientComponent
   }
 ];
 

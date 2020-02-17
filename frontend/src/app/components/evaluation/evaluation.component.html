@@ -2,126 +2,177 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-header">
-        <img src="../../../assets/img/avatar.jpeg" class="img-fluid" alt="avatar">
+        <img src="../../../assets/img/users.png" class="img-fluid" alt="avatar">
         <hr>
-        <p>Seccion 1</p>
-        <h3>Lorem, ipsum dolor.</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam facere, nemo recusandae
-          exercitationem voluptatibus voluptatum, suscipit eos impedit accusamus, porro in minus. Saepe eius
-          voluptas laborum voluptates distinctio aliquam at nesciunt ratione dolor, nobis consequatur maxime
-          laudantium est non veritatis modi aut delectus, porro ut? Maxime possimus doloremque voluptatem.
-          Aperiam quas molestias ipsam ut laboriosam architecto, maxime quam sed rerum?</p>
+        <h3>Instrucciones <i class="fas fa-exclamation-circle"></i></h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, nobis sapiente dolorum dolorem fuga,
+          quasi illo minima non temporibus delectus inventore hic accusantium excepturi tempora soluta quos nostrum
+          obcaecati nesciunt.</p>
+        <ul>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, doloremque.
+          </li>
+          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, quisquam. Eius odit consequuntur omnis nemo.
+          </li>
+          <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae libero inventore eos eaque.</li>
+        </ul>
       </div>
     </div>
   </div>
+  
   <div class="col-md-8">
-    <div class="card">
-      <div class="card-header">
-        <div class="container">
-          <div class="row justify-content-between">
-            <h2>Perico de los Palotes</h2>
-            <h2>FONASA B</h2>
+    <form (submit)="onSubmit()">
+      <div class="card">
+        <div class="card-header">
+          <h3>Datos personales</h3>
+          <div class="form-group pt-4">
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" name="txtRur" placeholder="Ingrese rut" required>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" name="txtAge" placeholder="Ingrese edad" required>
+              </div>
+            </div>
           </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="txtFullName" placeholder="Ingrese nombre completo del paciente"
+              required>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <select id="dlPrevition" class="form-control">
+                  <option selected>-- Seleccione previsión--</option>
+                </select>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" name="txtPhone" placeholder="Ingrese teléfono de contacto"
+                  required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="txtEmail" placeholder="Ingrese e-mail" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="txtAddress" placeholder="Ingrese dirección" required>
+          </div>
+          <div class="form-group">
+            <div class="row justify-content-md-center">
+              <div class="col-md-auto">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input value="Male" type="radio" id="customRadioInline2" name="customRadioInline1"
+                    class="custom-control-input">
+                  <label class="custom-control-label" for="customRadioInline2">Masculino</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input value="Female" type="radio" id="customRadioInline1" name="customRadioInline1"
+                    class="custom-control-input">
+                  <label class="custom-control-label" for="customRadioInline1">Femenino</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h3>Evaluación de paciente</h3>
+          <section>
+            <div class="form-group pt-4">
+              <div class="row">
+                <div class="col">
+                  <textarea class="form-control" placeholder="Anamnesis y examen físico" rows="3"></textarea>
+                </div>
+                <div class="col">
+                  <textarea class="form-control" placeholder="Estudios complementarios" rows="3"></textarea>
+                </div>
+              </div>
+  
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col">
+                  <textarea class="form-control" placeholder="Hipotesis kinesica" rows="3"></textarea>
+                </div>
+                <div class="col">
+                  <textarea class="form-control" placeholder="Plan de tratamiento" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </section>
+          <hr>
+          <h3>Información del tratamiento</h3>
+          <section>
+            <div class="form-group">
+              <textarea name="txtDiagnostic" class="form-control" rows="3"
+                placeholder="Ingrese diagnostico del paciente"></textarea>
+            </div>
+            <div class="form-group">
+              <div class="row justify-content-between">
+                <div class="col-5">
+                  <input type="number" class="form-control" placeholder="Número de sesiones">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-3 offset-md-6">
+                  <button (click)="redirect()" class="sky btn btn-smoke"><i class="fas fa-home"></i>  Home</button>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="raise btn btn-smoke"><i class="fas fa-save"></i>  Guardar</button>
+                </div>
+              </div>
+              
+            </div>
+          </section>
         </div>
-        <hr>
-        <p>Seccion 2</p>
-        <div class="container">
-          <div class="row justify-content-between">
-            <form class="form-inline">
-              <section class="input-content">
-                <div class="input-content-wrap">
-                  <dl class="inputbox">
-                    <dd class="inputbox-content">
-                      <input id="input0" type="text" required />
-                      <label for="input0">Peso</label>
-                      <span class="underline"></span>
-                    </dd>
-                  </dl>
-                </div>
-              </section>
+      </div>
+    </form>
+    
+  </div>
+</div>
 
-              <section class="input-content">
-                <div class="input-content-wrap">
-                  <dl class="inputbox">
-                    <dd class="inputbox-content">
-                      <input id="input1" type="text" required />
-                      <label for="input1">Otro dato</label>
-                      <span class="underline"></span>
-                    </dd>
-                  </dl>
-                </div>
-              </section>
-
-              <section class="input-content">
-                <div class="input-content-wrap">
-                  <dl class="inputbox">
-                    <dd class="inputbox-content">
-                      <input id="input2" type="text" required />
-                      <label for="input2">Color</label>
-                      <span class="underline"></span>
-                    </dd>
-                  </dl>
-                </div>
-              </section>
-            </form>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row justify-content-between">
-            <form class="form-inline">
-              <section class="input-content">
-                <div class="input-content-wrap">
-                  <dl class="inputbox">
-                    <dd class="inputbox-content">
-                      <input id="input4" type="text" required />
-                      <label for="input4">Edad</label>
-                      <span class="underline"></span>
-                    </dd>
-                  </dl>
-                </div>
-              </section>
-
-              <section class="input-content">
-                <div class="input-content-wrap">
-                  <dl class="inputbox">
-                    <dd class="inputbox-content">
-                      <input id="input5" type="text" required />
-                      <label for="input5">Flexibilidad</label>
-                      <span class="underline"></span>
-                    </dd>
-                  </dl>
-                </div>
-              </section>
-
-              <section class="input-content">
-                <div class="input-content-wrap">
-                  <dl class="inputbox">
-                    <dd class="inputbox-content">
-                      <input id="input6" type="text" required />
-                      <label for="input6">Altura</label>
-                      <span class="underline"></span>
-                    </dd>
-                  </dl>
-                </div>
-              </section>
-            </form>
-          </div>
+<!--ALERT MODAL-->
+<div class="backdrop" [ngStyle]="{'display':warningDisplay}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':warningDisplay}" id="warning-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content bg-warning">
+      <div class="modal-body text-center">
+        <h3 class="mb-15"><i class="fa fa-exclamation-triangle"></i> Precaución</h3>
+        <p>Esta acción no se puede revertir. Porfavor, presione el botón finalizar solo si todos los datos estan correctos.</p>
           <div class="row">
-            <button type="submit" class="btn-hover color-9 mx-auto">Aceptar</button>
+            <div class="col-6">
+              <button type="button" class="smoke btn btn-smoke" (click)="closeWarning()" data-dismiss="modal"><i class="fas fa-undo"></i> Volver</button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="smoke btn btn-smoke" (click)="showSuccess()" data-dismiss="modal"><i class="fas fa-check-circle"></i> Finalizar</button>
+            </div>
           </div>
-
-        </div>
-
-        <hr>
-        <p>Seccion 3</p>
-        <h3>Lorem ipsum dolor sit.</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In quis ab pariatur eaque, cumque ipsa
-          excepturi ad asperiores! Nam consectetur harum quo nulla nesciunt at eos quos tenetur unde
-          architecto.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In quis ab pariatur eaque, cumque ipsa
-          excepturi ad asperiores! Nam consectetur harum quo nulla nesciunt at eos quos tenetur unde
-          architecto.</p>
-
+      </div>
+    </div>
+  </div>
+</div>
+<!--SUCCESS MODAL-->
+<div class="backdrop" [ngStyle]="{'display':successDisplay}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':successDisplay}" id="success-modal" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center font-18">
+        <h3 class="mb-20">Correcto!</h3>
+        <div class="mb-30 text-center"><img src="../../../assets/success.png"></div>
+        Usted ha generado un nuevo tratamiento para este paciente. Ahora puede agendar sus sesiones respectivas.
+      </div>
+      <div class="modal-footer container">
+          <div class="row">
+              <div class="col-auto">
+                <button type="button" class="sky btn btn-smoke" (click)="redirect()"><i class="fas fa-home"></i> Home</button>
+              </div>
+              <div class="col-auto">
+                <button type="button" class="raise btn btn-smoke" (click)="closeSuccess()"><i class="fas fa-calendar-plus"></i> Agendar</button>
+              </div>
+          </div>
       </div>
     </div>
   </div>

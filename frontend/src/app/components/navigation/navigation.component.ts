@@ -15,6 +15,7 @@ export class NavigationComponent implements OnInit {
   }
 
   private nameDisplay = 'none';
+  private confirmDisplay = 'none';
   private errors = [];
   haveuser = false;
   public user = {};
@@ -25,6 +26,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.nameDisplay = 'none';
+    this.confirmDisplay='none';
   }
 
 
@@ -54,6 +56,13 @@ export class NavigationComponent implements OnInit {
   cleanUser() {
     this.user = {}
     this.nameDisplay='none';
+  }
+
+  openConfirm(){
+    this.confirmDisplay = 'block';
+  }
+  closeConfirm(){
+this.confirmDisplay='none';
   }
 
 }
