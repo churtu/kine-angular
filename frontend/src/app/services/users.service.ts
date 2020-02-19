@@ -8,7 +8,7 @@ import { LoginService } from './login.service';
 })
 export class UsersService {
 
-  URI = 'http://localhost:3000/api/'
+  URI = 'http://localhost:3000/api/';
   constructor(
     private http: HttpClient
   ) { }
@@ -29,6 +29,15 @@ export class UsersService {
     return this.http.get<any>(`${this.URI}users/byLoginId/${id}`);
   }
 
+  getSpecializations(){
+    return this.http.get<any>(`${this.URI}specializations`);
+  }
 
+  addKine_data(data){
+    return this.http.post<any>(`${this.URI}kine-data`,data);
+  }
   
+  getKineDataByUserId(id){
+    return this.http.get<any>(`${this.URI}kine-data/byUserId/${id}`);
+  }
 }

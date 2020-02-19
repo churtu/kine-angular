@@ -22,6 +22,8 @@ import { EvaluationComponent } from './components/evaluation/evaluation.componen
 import { MedicalCareComponent } from './components/medical-care/medical-care.component';
 import { MyPatientsComponent } from './components/my-patients/my-patients.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import {FullCalendarModule} from '@fullcalendar/angular'
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { FooterComponent } from './components/footer/footer.component';
     EvaluationComponent,
     MedicalCareComponent,
     MyPatientsComponent,
-    FooterComponent
+    FooterComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     NgbModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FullCalendarModule
   ],
   providers: [
     AuthGuard,

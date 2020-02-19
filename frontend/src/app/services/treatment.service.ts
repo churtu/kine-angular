@@ -14,6 +14,9 @@ export class TreatmentService {
     return this.http.get<any>(this.URI+'treatments');
   }
 
+  addTreatment(treatment){
+    return this.http.post<any>(this.URI+'treatments',treatment);
+  }
   
 
 }

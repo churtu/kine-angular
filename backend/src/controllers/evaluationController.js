@@ -21,9 +21,11 @@ controller.getEvaluation = async (req, res) => {
 
 controller.addEvaluation = async (req, res) => {
     try {
+        console.log(req.body);
         const newEvaluation = new Evaluation(req.body);
-        newEvaluation.save();
-        return res.status(200).send('OK');
+        const added = await newEvaluation.save();
+        console.log(added);
+        return res.status(200).json(added);
     } catch (error) {
         return res.status(401).send(error);
     }

@@ -28,46 +28,67 @@
           <div class="form-group pt-4">
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" name="txtRur" placeholder="Ingrese rut" required>
+                <input [(ngModel)]="user.rut" type="text" class="form-control" name="txtRur" placeholder="Ingrese rut" required>
               </div>
               <div class="col">
-                <input type="text" class="form-control" name="txtAge" placeholder="Ingrese edad" required>
+                <input type="text" [(ngModel)]="user.age" class="form-control" name="txtAge" placeholder="Ingrese edad" required>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="txtFullName" placeholder="Ingrese nombre completo del paciente"
-              required>
+            <div class="row">
+              <div class="col">
+                <input type="text" [(ngModel)]="user.firstName" class="form-control" name="txtfirstName" placeholder="Ingrese nombre"
+                required>
+              </div>
+              <div class="col">
+                <input type="text" [(ngModel)]="user.middleName" class="form-control" name="txtMiddleName" placeholder="Ingrese segundo nombre"
+                required>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col">
-                <select id="dlPrevition" class="form-control">
-                  <option selected>-- Seleccione previsión--</option>
+                <input type="text" [(ngModel)]="user.lastName" class="form-control" name="txtLastName" placeholder="Ingrese apellido paterno"
+                required>
+              </div>
+              <div class="col">
+                <input type="text" [(ngModel)]="user.middleLastName" class="form-control" name="txtMiddleLastName" placeholder="Ingrese apellido materno"
+                required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <select [(ngModel)]="patient_data.prevition" name="dlPrevition" class="form-control">
+                  <option disabled selected>-- Seleccione previsión--</option>
+                  <option *ngFor="let option of previtions">{{option}}</option>
                 </select>
               </div>
               <div class="col">
-                <input type="text" class="form-control" name="txtPhone" placeholder="Ingrese teléfono de contacto"
+                <input type="text" [(ngModel)]="user.phone" class="form-control" name="txtPhone" placeholder="Ingrese teléfono de contacto"
                   required>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="txtEmail" placeholder="Ingrese e-mail" required>
+            <input type="text" [(ngModel)]="user.email" class="form-control" name="txtEmail" placeholder="Ingrese e-mail" required>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="txtAddress" placeholder="Ingrese dirección" required>
+            <input type="text" [(ngModel)]="user.address" class="form-control" name="txtAddress" placeholder="Ingrese dirección" required>
           </div>
           <div class="form-group">
             <div class="row justify-content-md-center">
               <div class="col-md-auto">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input value="Male" type="radio" id="customRadioInline2" name="customRadioInline1"
+                  <input value="Male" [(ngModel)]="user.gender" type="radio" id="customRadioInline2" name="customRadioInline1"
                     class="custom-control-input">
                   <label class="custom-control-label" for="customRadioInline2">Masculino</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input value="Female" type="radio" id="customRadioInline1" name="customRadioInline1"
+                  <input value="Female" [(ngModel)]="user.gender" type="radio" id="customRadioInline1" name="customRadioInline1"
                     class="custom-control-input">
                   <label class="custom-control-label" for="customRadioInline1">Femenino</label>
                 </div>
@@ -75,15 +96,15 @@
             </div>
           </div>
           <hr>
-          <h3>Evaluación de paciente</h3>
+          <h3>Evaluación</h3>
           <section>
             <div class="form-group pt-4">
               <div class="row">
                 <div class="col">
-                  <textarea class="form-control" placeholder="Anamnesis y examen físico" rows="3"></textarea>
+                  <textarea [(ngModel)]="evaluation.anamnesis" name="txtAnamnesis" class="form-control" placeholder="Anamnesis y examen físico" rows="3"></textarea>
                 </div>
                 <div class="col">
-                  <textarea class="form-control" placeholder="Estudios complementarios" rows="3"></textarea>
+                  <textarea [(ngModel)]="evaluation.complementStudies" name="txtComplementStudies" class="form-control" placeholder="Estudios complementarios" rows="3"></textarea>
                 </div>
               </div>
   
@@ -91,25 +112,25 @@
             <div class="form-group">
               <div class="row">
                 <div class="col">
-                  <textarea class="form-control" placeholder="Hipotesis kinesica" rows="3"></textarea>
+                  <textarea [(ngModel)]="evaluation.hypothesis" name="txtHypothesis" class="form-control" placeholder="Hipotesis kinesica" rows="3"></textarea>
                 </div>
                 <div class="col">
-                  <textarea class="form-control" placeholder="Plan de tratamiento" rows="3"></textarea>
+                  <textarea [(ngModel)]="evaluation.treatment_plan" name="txtTreatment_plan" class="form-control" placeholder="Plan de tratamiento" rows="3"></textarea>
                 </div>
               </div>
             </div>
           </section>
           <hr>
-          <h3>Información del tratamiento</h3>
+          <h3>Tratamiento</h3>
           <section>
             <div class="form-group">
-              <textarea name="txtDiagnostic" class="form-control" rows="3"
+              <textarea [(ngModel)]="treatment.diagnostic" name="txtDiagnostic" class="form-control" rows="3"
                 placeholder="Ingrese diagnostico del paciente"></textarea>
             </div>
             <div class="form-group">
               <div class="row justify-content-between">
                 <div class="col-5">
-                  <input type="number" class="form-control" placeholder="Número de sesiones">
+                  <input [(ngModel)]="treatment.sessions" name="txtSessions" type="number" class="form-control" placeholder="Número de sesiones">
                 </div>
               </div>
             </div>
@@ -146,7 +167,7 @@
               <button type="button" class="smoke btn btn-smoke" (click)="closeWarning()" data-dismiss="modal"><i class="fas fa-undo"></i> Volver</button>
             </div>
             <div class="col-6">
-              <button type="button" class="smoke btn btn-smoke" (click)="showSuccess()" data-dismiss="modal"><i class="fas fa-check-circle"></i> Finalizar</button>
+              <button type="button" class="smoke btn btn-smoke" (click)="addData()" data-dismiss="modal"><i class="fas fa-check-circle"></i> Finalizar</button>
             </div>
           </div>
       </div>
@@ -170,7 +191,7 @@
                 <button type="button" class="sky btn btn-smoke" (click)="redirect()"><i class="fas fa-home"></i> Home</button>
               </div>
               <div class="col-auto">
-                <button type="button" class="raise btn btn-smoke" (click)="closeSuccess()"><i class="fas fa-calendar-plus"></i> Agendar</button>
+                <button type="button" class="raise btn btn-smoke" (click)="closeSuccess()"><i class="fas fa-calendar-plus"></i> Agendar sesiones</button>
               </div>
           </div>
       </div>

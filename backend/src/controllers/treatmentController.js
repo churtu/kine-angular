@@ -22,8 +22,8 @@ controller.getTreatment = async (req, res) => {
 controller.addTreatment = async (req, res) => {
     try {
         const newTreatment = new Treatment(req.body);
-        await newTreatment.save();
-        return res.status(200).send('OK');
+        const added = await newTreatment.save();
+        return res.status(200).json(added);
     } catch (error) {
         return res.status(401).send(error);
     }

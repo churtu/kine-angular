@@ -21,10 +21,15 @@ export class NewUserComponent implements OnInit {
     email: '',
     address: '',
     gender: '',
-    specialization: '',
-    typeUser_fk: ''
+    type_user_fk: ''
   }
 
+  private kine_data = {
+    specialization_fk:'',
+    kine_fk:''
+  }
+
+  specializations =[];
   successDisplay = 'none';
   alertDisplay = 'none'
   errors = [];
@@ -37,7 +42,13 @@ export class NewUserComponent implements OnInit {
 
   ngOnInit() {
     this.successDisplay = 'none';
-    this.alertDisplay = 'none'
+    this.alertDisplay = 'none';
+    this.usersService.getSpecializations().subscribe(
+      res =>{
+        this.specializations = res;
+      },
+      err => console.log(err)
+    )
   }
 
   validateForm() {
@@ -51,7 +62,7 @@ export class NewUserComponent implements OnInit {
     if (this.user.phone == '') { isValid = false; this.errors.push('- Teléfono'); }
     if (this.user.email == '') { isValid = false; this.errors.push('- E-mail'); }
     if (this.user.gender == '') { isValid = false; this.errors.push('- Genero'); }
-    if (this.user.specialization == '') { isValid = false; this.errors.push('Especialización'); }
+    if (this.kine_data.specialization_fk == '') { isValid = false; this.errors.push('Especialización'); }
     if (this.user.address == '') { isValid = false; this.errors.push('- Dirección') }
     return isValid;
   }
@@ -60,7 +71,7 @@ export class NewUserComponent implements OnInit {
     this.typeUserService.getByDesc('kine').subscribe(
       res => {
         if (this.validateForm()) {
-          this.user.typeUser_fk = res._id;
+          this.user.type_user_fk = res._id;
           this.createUser();
         } else {
           this.alertDisplay = 'block';
@@ -76,8 +87,13 @@ export class NewUserComponent implements OnInit {
   createUser() {
     this.usersService.addUser(this.user).subscribe(
       res => {
-        console.log(res);
-        this.successDisplay = 'block';
+        this.kine_data.kine_fk=res._id;
+        this.usersService.addKine_data(this.kine_data).subscribe(
+          res => {
+            this.successDisplay = 'block';
+          },
+          err => console.log(err)
+        )
       },
       err => {
         console.log(err);
@@ -94,5 +110,7 @@ export class NewUserComponent implements OnInit {
     this.alertDisplay = 'none';
     this.errors = [];
   }
+
+  
 
 }

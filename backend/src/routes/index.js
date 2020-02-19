@@ -86,12 +86,14 @@ router.route('/specializations/:id')
 
 // KINE_DATA ROUTES -------------------------------------------------
 router.route('/kine-data')
-    .get(kineDataController.getAllKineData)
+    .get(kineDataController.getAllKineDatas)
     .post(kineDataController.addKineData);
 
 router.route('/kine-data/:id')
-    .get(kineDataController.getKineData)
     .delete(kineDataController.deleteKineData);
+
+router.route('/kine-data/byUserId/:id')
+    .get(kineDataController.getKineDataByUserId);
 
 // TREATMENT ROUTES -------------------------------------------------
 router.route('/treatments')

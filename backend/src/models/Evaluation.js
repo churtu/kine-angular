@@ -6,9 +6,9 @@ const EvaluationSchema = new Schema({
     complementStudies: { type: String },
     hypothesys: { type: String },
     treatment_plan: { type: String },
-    treatment_fk: { type: ObjectId },
     type_eval_fk: { type: ObjectId },
-    kine_fk: { type: ObjectId }
+    patient_data_fk: { type: ObjectId },
+    kine_data_fk: { type: ObjectId }
 }, { timestamps: true });
 
 module.exports = model('Evaluation', EvaluationSchema);

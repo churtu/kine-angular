@@ -3,7 +3,7 @@ const { ObjectId } = Schema
 
 const PatientDataSchema = new Schema({
     prevition: { type: String },
-    user_fk: { type: ObjectId }
+    patient_fk: { type: ObjectId }
 });
 
 module.exports = model('Patient_data', PatientDataSchema);

@@ -25,8 +25,8 @@ controller.addTypeUser = async (req, res) => {
     try {
         const { description } = req.body;
         const newType = new TypeUser({ description });
-        await newType.save();
-        return res.status(200);
+        added = await newType.save();
+        return res.status(200).json(added);
     } catch (error) {
         return res.status(402).send(error);
     }

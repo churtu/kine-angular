@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     phone: { type: String, required: true },
     address: {type: String, required: true},
     login_fk: { type: ObjectId},
-    typeUser_fk: { type: ObjectId}
+    type_user_fk: { type: ObjectId}
 }, {
     timestamps: true
 });

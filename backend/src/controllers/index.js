@@ -4,10 +4,10 @@ module.exports = {
     userController: require('../controllers/userController'),
     patientDataController: require('./patientDataController'),
     specializationController: require('../controllers/specializationController'),
-    kineDataController: require('../controllers/kineDataController'),
     treatmentController: require('../controllers/treatmentController'),
     sessionController: require('../controllers/sessionController'),
     typeEvaluationController: require('../controllers/typeEvaluationController'),
     evaluationController: require('../controllers/evaluationController'),
-    agendaController: require('../controllers/agendaController')
+    agendaController: require('../controllers/agendaController'),
+    kineDataController: require('../controllers/kineDataController')
 }

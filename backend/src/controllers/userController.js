@@ -39,11 +39,13 @@ controller.deleteUser = async (req, res) => {
 
 controller.addUser = async (req, res) => {
     try {
+        
         const { rut } = req.body;
         const user = await User.findOne({ rut });
         if (!user) {
             const newUser = new User(req.body);
             newUser.login_fk = req.loginId;
+            console.log(req.loginId);
             created = await newUser.save();
             return res.status(200).json(created);
         } else {
