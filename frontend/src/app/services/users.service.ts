@@ -40,4 +40,8 @@ export class UsersService {
   getKineDataByUserId(id){
     return this.http.get<any>(`${this.URI}kine-data/byUserId/${id}`);
   }
+
+  getAllKines(){
+    return this.http.get<any>(`${this.URI}kine-data`);
+  }
 }

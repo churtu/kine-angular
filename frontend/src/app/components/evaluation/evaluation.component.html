@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="card">
       <div class="card-header">
         <img src="../../../assets/img/users.png" class="img-fluid" alt="avatar">
@@ -19,157 +19,225 @@
       </div>
     </div>
   </div>
-  
-  <div class="col-md-8">
+
+  <div class="col-md-9">
     <form (submit)="onSubmit()">
       <div class="card">
         <div class="card-header">
-          <h3>Datos personales</h3>
+          <div class="row justify-content-between">
+            <div class="col-6">
+              <h3>Datos personales</h3>
+            </div>
+            <div *ngIf="user.gender == 'Masculino'; else female" class="col-2"><span><i class="fas fa-mars fa-3x"></i></span>
+            </div>
+            <ng-template #female>
+              <div class="col-2"><span><i class="fas fa-venus fa-3x"></i></span></div>
+            </ng-template>
+
+          </div>
+
           <div class="form-group pt-4">
             <div class="row">
               <div class="col">
-                <input [(ngModel)]="user.rut" type="text" class="form-control" name="txtRur" placeholder="Ingrese rut" required>
+                <mat-form-field appearance="outline">
+                  <mat-label>Rut</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="15" matInput placeholder="Rut"
+                    [(ngModel)]="user.rut" name="txtRut">
+                  <mat-icon matSuffix><i class="fas fa-fingerprint"></i></mat-icon>
+
+                </mat-form-field>
               </div>
               <div class="col">
-                <input type="text" [(ngModel)]="user.age" class="form-control" name="txtAge" placeholder="Ingrese edad" required>
+                <mat-form-field appearance="outline">
+                  <mat-label>Edad</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="2" matInput placeholder="Edad"
+                    [(ngModel)]="user.age" name="txtAge">
+                  <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+                </mat-form-field>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col">
-                <input type="text" [(ngModel)]="user.firstName" class="form-control" name="txtfirstName" placeholder="Ingrese nombre"
-                required>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="15" matInput placeholder="Nombre"
+                    [(ngModel)]="user.firstName" name="txtFirstName">
+                  <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+                </mat-form-field>
+
               </div>
               <div class="col">
-                <input type="text" [(ngModel)]="user.middleName" class="form-control" name="txtMiddleName" placeholder="Ingrese segundo nombre"
-                required>
+                <mat-form-field appearance="outline">
+                  <mat-label>Segundo nombre</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="15" matInput placeholder="Segundo nombre"
+                    [(ngModel)]="user.middleName" name="txtMiddleName">
+                  <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+                </mat-form-field>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col">
-                <input type="text" [(ngModel)]="user.lastName" class="form-control" name="txtLastName" placeholder="Ingrese apellido paterno"
-                required>
+                <mat-form-field appearance="outline">
+                  <mat-label>A. paterno</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="15" matInput placeholder="A. paterno"
+                    [(ngModel)]="user.lastName" name="txtLastName">
+                  <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+                </mat-form-field>
               </div>
               <div class="col">
-                <input type="text" [(ngModel)]="user.middleLastName" class="form-control" name="txtMiddleLastName" placeholder="Ingrese apellido materno"
-                required>
+                <mat-form-field appearance="outline">
+                  <mat-label>A. materno</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="15" matInput placeholder="A. materno"
+                    [(ngModel)]="user.middleLastName" name="txtMiddleLastName">
+                  <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+                </mat-form-field>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col">
-                <select [(ngModel)]="patient_data.prevition" name="dlPrevition" class="form-control">
-                  <option disabled selected>-- Seleccione previsión--</option>
-                  <option *ngFor="let option of previtions">{{option}}</option>
-                </select>
+                <mat-form-field appearance="outline">
+                  <mat-label>Previsión</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="15" matInput placeholder="Previsión"
+                    [(ngModel)]="patient_data.prevition" name="txtPrevition">
+                  <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+                </mat-form-field>
               </div>
               <div class="col">
-                <input type="text" [(ngModel)]="user.phone" class="form-control" name="txtPhone" placeholder="Ingrese teléfono de contacto"
-                  required>
+                <mat-form-field appearance="outline">
+                  <mat-label>Teléfono</mat-label>
+                  <input class="text-black" disabled type="text" maxlength="15" matInput placeholder="Teléfono"
+                    [(ngModel)]="user.phone" name="txtPhone">
+                  <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+                </mat-form-field>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <input type="text" [(ngModel)]="user.email" class="form-control" name="txtEmail" placeholder="Ingrese e-mail" required>
+            <mat-form-field appearance="outline">
+              <mat-label>Correo electronico</mat-label>
+              <input class="text-black" disabled type="text" maxlength="30" matInput placeholder="E-mail"
+                [(ngModel)]="user.email" name="txtEmail">
+              <mat-icon matSuffix><i class="fas fa-at"></i></mat-icon>
+            </mat-form-field>
           </div>
           <div class="form-group">
-            <input type="text" [(ngModel)]="user.address" class="form-control" name="txtAddress" placeholder="Ingrese dirección" required>
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección</mat-label>
+              <input class="text-black" disabled type="text" maxlength="60" matInput placeholder="Dirección"
+                [(ngModel)]="user.address" name="txtAddress">
+              <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+            </mat-form-field>
           </div>
+          <hr>
+          <h3>Diagnostico <i class="fas fa-exclamation-circle"></i></h3>
           <div class="form-group">
-            <div class="row justify-content-md-center">
-              <div class="col-md-auto">
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input value="Male" [(ngModel)]="user.gender" type="radio" id="customRadioInline2" name="customRadioInline1"
-                    class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInline2">Masculino</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input value="Female" [(ngModel)]="user.gender" type="radio" id="customRadioInline1" name="customRadioInline1"
-                    class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInline1">Femenino</label>
-                </div>
-              </div>
-            </div>
+            <span>{{treatment.diagnostic}}</span>
           </div>
           <hr>
           <h3>Evaluación</h3>
           <section>
             <div class="form-group pt-4">
-              <div class="row">
-                <div class="col">
-                  <textarea [(ngModel)]="evaluation.anamnesis" name="txtAnamnesis" class="form-control" placeholder="Anamnesis y examen físico" rows="3"></textarea>
-                </div>
-                <div class="col">
-                  <textarea [(ngModel)]="evaluation.complementStudies" name="txtComplementStudies" class="form-control" placeholder="Estudios complementarios" rows="3"></textarea>
-                </div>
-              </div>
-  
+              <mat-form-field appearance="outline">
+                <mat-label>Anamnesis y examen físico</mat-label>
+                <textarea maxlength="250" #txtAnamnesis matInput [(ngModel)]="evaluation.anamnesis" name="txtAnamnesis"
+                  placeholder="Anamnesis y examen físico" rows="3"></textarea>
+                <mat-hint align="end">{{txtAnamnesis.value.length}} / 250</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Estudios complementarios</mat-label>
+                <textarea maxlength="250" #txtComplementStudies matInput [(ngModel)]="evaluation.complementStudies"
+                  name="txtComplementStudies" placeholder="Estudios complementarios" rows="3"></textarea>
+                <mat-hint align="end">{{txtComplementStudies.value.length}} / 250</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Hipotesis kinesica</mat-label>
+                <textarea maxlength="250" #txtHypothesis matInput [(ngModel)]="evaluation.hypothesis"
+                  name="txtHypothesis" placeholder="Hipotesis kinesica" rows="3"></textarea>
+                <mat-hint align="end">{{txtHypothesis.value.length}} / 250</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Plan de tratamiento</mat-label>
+                <textarea #txtTreatment_plan maxlength="250" matInput [(ngModel)]="evaluation.treatment_plan"
+                  name="txtTreatment_plan" placeholder="Plan de tratamiento" rows="3"></textarea>
+                <mat-hint align="end">{{txtTreatment_plan.value.length}} / 250</mat-hint>
+              </mat-form-field>
             </div>
             <div class="form-group">
               <div class="row">
                 <div class="col">
-                  <textarea [(ngModel)]="evaluation.hypothesis" name="txtHypothesis" class="form-control" placeholder="Hipotesis kinesica" rows="3"></textarea>
+                  <strong>Importante </strong><i class="fas fa-exclamation-triangle"></i> Este valor define la cantidad total de atenciones para este paciente.
                 </div>
                 <div class="col">
-                  <textarea [(ngModel)]="evaluation.treatment_plan" name="txtTreatment_plan" class="form-control" placeholder="Plan de tratamiento" rows="3"></textarea>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Cantidad de Sesiones</mat-label>
+                    <input matInput maxlength="2" [(ngModel)]="treatment.sessions" name="txtSessions" type="text"
+                      [formControl]="sessionsFormControl" [errorStateMatcher]="matcher"
+                      placeholder="Número de sesiones">
+                    <mat-error *ngIf="sessionsFormControl.hasError('required')">
+                      Cant. sesiones es <strong>requerida</strong>
+                    </mat-error>
+                    <mat-error *ngIf="sessionsFormControl.hasError('pattern')">
+                      Porfavor, ingrese números <strong>positivos</strong>
+                    </mat-error>
+                  </mat-form-field>
                 </div>
               </div>
+
             </div>
           </section>
           <hr>
-          <h3>Tratamiento</h3>
           <section>
-            <div class="form-group">
-              <textarea [(ngModel)]="treatment.diagnostic" name="txtDiagnostic" class="form-control" rows="3"
-                placeholder="Ingrese diagnostico del paciente"></textarea>
-            </div>
-            <div class="form-group">
-              <div class="row justify-content-between">
-                <div class="col-5">
-                  <input [(ngModel)]="treatment.sessions" name="txtSessions" type="number" class="form-control" placeholder="Número de sesiones">
-                </div>
-              </div>
-            </div>
             <div class="form-group">
               <div class="row">
                 <div class="col-md-3 offset-md-6">
-                  <button (click)="redirect()" class="sky btn btn-smoke"><i class="fas fa-home"></i>  Home</button>
+                  <a routerLink="/home" class="sky btn btn-smoke"><i class="fas fa-home"></i> Home</a>
                 </div>
                 <div class="col-md-3">
-                  <button type="submit" class="raise btn btn-smoke"><i class="fas fa-save"></i>  Guardar</button>
+                  <button type="submit" class="raise btn btn-smoke"><i class="fas fa-save"></i> Guardar</button>
                 </div>
               </div>
-              
+
             </div>
           </section>
         </div>
       </div>
     </form>
-    
+
   </div>
 </div>
 
 <!--ALERT MODAL-->
 <div class="backdrop" [ngStyle]="{'display':warningDisplay}"></div>
-<div class="modal animated fadeInDown" [ngStyle]="{'display':warningDisplay}" id="warning-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-  aria-hidden="true">
+<div class="modal animated fadeInDown" [ngStyle]="{'display':warningDisplay}" id="warning-modal" tabindex="-1"
+  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content bg-warning">
       <div class="modal-body text-center">
         <h3 class="mb-15"><i class="fa fa-exclamation-triangle"></i> Precaución</h3>
-        <p>Esta acción no se puede revertir. Porfavor, presione el botón finalizar solo si todos los datos estan correctos.</p>
-          <div class="row">
-            <div class="col-6">
-              <button type="button" class="smoke btn btn-smoke" (click)="closeWarning()" data-dismiss="modal"><i class="fas fa-undo"></i> Volver</button>
-            </div>
-            <div class="col-6">
-              <button type="button" class="smoke btn btn-smoke" (click)="addData()" data-dismiss="modal"><i class="fas fa-check-circle"></i> Finalizar</button>
-            </div>
+        <p>Esta acción no se puede revertir. Porfavor, presione el botón finalizar solo si todos los datos estan
+          correctos.</p>
+        <div class="row">
+          <div class="col-6">
+            <button type="button" class="smoke btn btn-smoke" (click)="closeWarning()" data-dismiss="modal"><i
+                class="fas fa-undo"></i> Volver</button>
           </div>
+          <div class="col-6">
+            <button type="button" class="smoke btn btn-smoke" (click)="addData()" data-dismiss="modal"><i
+                class="fas fa-check-circle"></i> Finalizar</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -183,17 +251,15 @@
       <div class="modal-body text-center font-18">
         <h3 class="mb-20">Correcto!</h3>
         <div class="mb-30 text-center"><img src="../../../assets/success.png"></div>
-        Usted ha generado un nuevo tratamiento para este paciente. Ahora puede agendar sus sesiones respectivas.
+        Usted ha realizado la evaluacion inicial de este paciente. Ahora puede agendar sus sesiones respectivas.
       </div>
       <div class="modal-footer container">
-          <div class="row">
-              <div class="col-auto">
-                <button type="button" class="sky btn btn-smoke" (click)="redirect()"><i class="fas fa-home"></i> Home</button>
-              </div>
-              <div class="col-auto">
-                <button type="button" class="raise btn btn-smoke" (click)="closeSuccess()"><i class="fas fa-calendar-plus"></i> Agendar sesiones</button>
-              </div>
+        <div class="row">
+          <div class="col-auto">
+            <button type="button" class="raise btn btn-smoke" routerLink="/schedule"><i
+                class="fas fa-calendar-plus"></i> Agendar sesiones</button>
           </div>
+        </div>
       </div>
     </div>
   </div>

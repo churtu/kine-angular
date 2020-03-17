@@ -18,5 +18,8 @@ export class TreatmentService {
     return this.http.post<any>(this.URI+'treatments',treatment);
   }
   
+  putTreatment(id, treatment){
+    return this.http.put<any>(this.URI+'treatments/'+id,treatment);
+  }
 
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +23,10 @@ import { MedicalCareComponent } from './components/medical-care/medical-care.com
 import { MyPatientsComponent } from './components/my-patients/my-patients.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
-import {FullCalendarModule} from '@fullcalendar/angular'
+import {FullCalendarModule} from '@fullcalendar/angular';
+import { AgendaEvaluationComponent } from './components/agenda-evaluation/agenda-evaluation.component';
+import { ClockComponent } from './components/clock/clock.component';
+import { WelcomeComponent } from './components/welcome/welcome.component'
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import {FullCalendarModule} from '@fullcalendar/angular'
     MedicalCareComponent,
     MyPatientsComponent,
     FooterComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    AgendaEvaluationComponent,
+    ClockComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,8 @@ import {FullCalendarModule} from '@fullcalendar/angular'
     NgbModule,
     MaterialModule,
     BrowserAnimationsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthGuard,

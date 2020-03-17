@@ -7,46 +7,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <button class="air" routerLink="/about">
-                        <a type="button" class="nav-link" >
-                            About
-                        </a>
-                    </button>
-                </li>
                 <ng-container *ngIf="this.loginService.isLogged()">
                     <li class="nav-item">
-                        <button class="air"  routerLink="/home">
+                        <button class="air" routerLink="/home">
                             <a type="button" class="nav-link">
                                 Home
                             </a>
                         </button>
-
                     </li>
                     <li class="nav-item">
-                        <button class="air" routerLink="/evaluation">
-                            <a type="button" class="nav-link" >
-                                Realizar evaluacion
-                            </a>
-                        </button>
-
-                    </li>
-                    <li class="nav-item">
-                        <button class="air">
-                            <a type="button" class="nav-link" routerLink="/medical-care">
-                                Atender
+                        <button class="air" routerLink="/agenda-evaluation">
+                            <a type="button" class="nav-link">
+                                Agendar evaluacion
                             </a>
                         </button>
                     </li>
-                    <li class="nav-item">
-                        <button class="air">
-                            <a type="button" class="nav-link" routerLink="/schedule">
-                                Agendamiento
-                            </a>
-                        </button>
-                    </li>
-                    
-                    
                 </ng-container>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -64,8 +39,8 @@
                                 Log in
                             </a>
                         </button>
-
                     </li>
+                    
                 </ng-container>
                 <ng-template #logged>
                     <li class="nav-item">
@@ -79,12 +54,10 @@
                                         </div>
                                     </div>
                                 </a>
+                                
                                 <a type="button" class="nav-link" [ngStyle]="{'display':nameDisplay}"
-                                     style="cursor: pointer;" (click)="openConfirm()"
-                                    routerLinkActive="active">
-                                    
-                                    Cerrar sesion - {{user.firstName}} {{user.middleName}}
-                                    {{user.lastName}} {{user.middleLastName}}
+                                    style="cursor: pointer;" (click)="openConfirm()" routerLinkActive="active">
+                                    Cerrar sesion - {{user.firstName}} {{user.middleName}} {{user.lastName}} {{user.middleLastName}}
                                 </a>
 
                             </div>
@@ -98,19 +71,23 @@
 
 <!--CONFIRM MODAL-->
 <div class="backdrop" [ngStyle]="{'display':confirmDisplay}"></div>
-<div class="modal animated fadeInDown" [ngStyle]="{'display':confirmDisplay}" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal animated fadeInDown" [ngStyle]="{'display':confirmDisplay}" id="confirmation-modal" tabindex="-1"
+    role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body text-center font-18">
-                <h4 >Está seguro(a) que desea cerrar la sesión?</h4>
+                <h4>Está seguro(a) que desea cerrar la sesión?</h4>
             </div>
             <div class="modal-footer font-18">
                 <div class="row pt-4 justify-content-center">
                     <div class="col-auto">
-                        <button (click)="closeConfirm()" type="button" class="sky btn btn-smoke" data-dismiss="modal"><i class="fas fa-undo"></i> Volver</button>
+                        <button (click)="closeConfirm()" type="button" class="sky btn btn-smoke" data-dismiss="modal"><i
+                                class="fas fa-undo"></i> Cancelar</button>
                     </div>
                     <div class="col-auto">
-                        <button type="button" (click)="loginService.logout(); cleanUser(); closeConfirm();" class="sky btn btn-smoke" data-dismiss="modal"><i class="fas fa-sign-out-alt"></i> Cerrar sesion</button>
+                        <button type="button" (click)="loginService.logout(); cleanUser(); closeConfirm();"
+                            class="sky btn btn-smoke" data-dismiss="modal"><i class="fas fa-sign-out-alt"></i> Cerrar
+                            sesion</button>
                     </div>
                 </div>
             </div>

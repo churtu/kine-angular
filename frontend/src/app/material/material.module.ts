@@ -5,7 +5,14 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule, 
+  ErrorStateMatcher, 
+  ShowOnDirtyErrorStateMatcher,
+  MatIconModule,
+  MatSelectModule,
+  MatRadioModule,
+  MAT_RADIO_DEFAULT_OPTIONS,
+  MatCardModule
 } from '@angular/material';
 
 
@@ -17,14 +24,32 @@ import {
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule
   ],
   exports: [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule
+  ],
+  providers: [
+    {
+      provide: ErrorStateMatcher, 
+      useClass: ShowOnDirtyErrorStateMatcher
+    },
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'accent' },
+    }
   ]
 })
 export class MaterialModule { }

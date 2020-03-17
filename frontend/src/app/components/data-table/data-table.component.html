@@ -4,12 +4,15 @@
       <div class="col-auto mt-auto mr-auto">
         <h5><i class="fas fa-user-clock"></i> Mis pacientes de hoy</h5>
       </div>
-      <div class="col-auto">
+      <!--
+        <div class="col-auto">
         <mat-form-field>
           <mat-label>Buscar</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Ex. nombre, edad, etc.">
         </mat-form-field>
       </div>
+      -->
+      
 
     </div>
   </div>
@@ -18,9 +21,61 @@
 
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
-        <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
-          <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        <ng-container matColumnDef="Nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"> {{row.Nombre}} </td>
+        </ng-container>
+
+        <!-- Rut Column -->
+        <ng-container matColumnDef="Rut">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Rut </th>
+          <td mat-cell *matCellDef="let row"> {{row.Rut}} </td>
+        </ng-container>
+
+        <!-- Gender Column -->
+        <ng-container matColumnDef="Genero">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Genero </th>
+          <td mat-cell *matCellDef="let row"> {{row.Genero}} </td>
+        </ng-container>
+
+        <!-- Age Column -->
+        <ng-container matColumnDef="Edad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Edad </th>
+          <td mat-cell *matCellDef="let row"> {{row.Edad}} </td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="Direccion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
+          <td mat-cell *matCellDef="let row"> {{row.Direccion}} </td>
+        </ng-container>
+
+        <!-- Phone Column -->
+        <ng-container matColumnDef="Telefono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+          <td mat-cell *matCellDef="let row"> {{row.Telefono}} </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.Type=='ingreso'" class="badge badge-pill badge-warning text-black">
+              <i class="fas fa-plus-circle"></i> Ingreso
+            </span>
+            <span *ngIf="row.Type=='session'" class="badge badge-pill badge-primary text-black">
+              <i class="fas fa-heartbeat"></i> Sesion
+            </span>
+            <span *ngIf="row.Type=='closed'" class="badge badge-pill badge-success text-black">
+              <i class="fas fa-check-circle"></i> Atendido
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Options Column -->
+        <ng-container matColumnDef="Options">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
+          <td mat-cell *matCellDef="let row"><span class="badge badge-pill badge-info">Info</span></td>
         </ng-container>
 
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
@@ -28,10 +83,13 @@
           <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
             <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-              <button type="submit" class="btn-hover color-5 btn">Atender <i class="fas fa-user-check"></i></button>
+              <button *ngIf="element.Type=='ingreso'" type="submit" (click)="redirect(element);"
+                class="sky btn btn-smoke">Evaluar <i class="fas fa-stethoscope"></i></button>
+              <button *ngIf="element.Type=='session'" type="submit" (click)="redirect(element);"
+                class="raise btn btn-smoke">Atender <i class="fas fa-stethoscope"></i></button>
               <div class="example-element-description">
-                {{element.description}}
-                <span class="example-element-description-attribution"> -- Wikipedia </span>
+                <h6>Diagnostico <i class="fas fa-notes-medical"></i></h6>
+                <textarea disabled matInput cols="120" class="text-black">{{element.Diagnostico}}</textarea>
               </div>
             </div>
           </td>

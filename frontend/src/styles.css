@@ -1,9 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 body{
-    background: url(assets/bg-index.png);
+    
     font-family: 'Raleway', sans-serif;
-    background-position: unset;
+    background: url(assets/img/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 * {
@@ -164,20 +168,19 @@ button {
 }
 
 .backdrop{
- 
   background-color:rgba(0,0,0,0.6);
    z-index: 1000;
   position:fixed;
-   
   top:0;
-   
   left:0;
-   
   width:100%;
-   
   height:100vh;
-   
   }
+
+  .cdk-overlay-container, .cdk-overlay-pane, .dropdown-menu {
+    z-index: 9999 !important;
+}
+
 
 
 

@@ -18,4 +18,12 @@ export class PatientService {
   getTreatmentsByPatientId(id){
     return this.http.get(this.URI+'patient-data/treatmentByPatientId/'+id);
   }
+
+  getPatientDataByUserId(id){
+    return this.http.get<any>(this.URI+'patient-data/byUserId/'+id);
+  }
+
+  getPatiensIdByKineId(id){
+    return this.http.get<any>(`${this.URI}patient-data/byKineId/`+id);
+  }
 }

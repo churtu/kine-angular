@@ -10,7 +10,8 @@ const {
     sessionController,
     typeEvaluationController,
     evaluationController,
-    agendaController
+    agendaController,
+    typeAgendaController
 } = require('../controllers/index');
 const { verifyToken } = require('../guard/verifyToken');
 
@@ -60,6 +61,7 @@ router.route('/users/:id/schedules')
 
 router.route('/users/byLoginId/:login_id')
     .get(userController.getUserByLoginId);
+
     
 // PATIENT_DATA ROUTES ----------------------------------------------------
 router.route('/patient-data')
@@ -75,6 +77,9 @@ router.route('/patient-data/byUserId/:id')
 
 router.route('/patient-data/treatmentByPatientId/:id')
     .get(patientDataController.getDiagnosticByPatientId);
+
+router.route('/patient-data/byKineId/:id')
+    .get(patientDataController.getPatientsByKineId);
 // SPECIALIZATION ROUTES ---------------------------------------------
 router.route('/specializations')
     .get(specializationController.getAllSpecializations)
@@ -102,7 +107,8 @@ router.route('/treatments')
 
 router.route('/treatments/:id')
     .get(treatmentController.getTreatment)
-    .delete(treatmentController.deleteTreatment);
+    .delete(treatmentController.deleteTreatment)
+    .put(treatmentController.putTreatment);
 
 
 // SESSIONS ROUTES --------------------------------------------------
@@ -137,11 +143,16 @@ router.route('/agenda')
     .get(agendaController.getAllAgendas)
     .post(agendaController.addAgenda);
 
-    router.route('/agenda/:id')
+router.route('/agenda/:id')
     .get(agendaController.getAgenda)
+    .put(agendaController.putAgenda)
     .delete(agendaController.deleteAgenda);
- 
+    
 router.route('/agenda/kine/:id')
     .get(agendaController.getAgendaDataByKineId);
+
+    router.route('/agenda/kine/:id/date/:date')
+    .get(agendaController.getAgendaDataByKineIdAndDate);
+
 
 module.exports = router;

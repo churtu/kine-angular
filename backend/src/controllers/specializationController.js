@@ -31,8 +31,8 @@ controller.deleteSpecialization = async (req, res) => {
 controller.addSpecialization = async (req, res) => {
     try {
         const newSpecialization = new Specialization(req.body);
-        await newSpecialization.save();
-        return res.status(200).send('OK');
+        const added = await newSpecialization.save();
+        return res.status(200).json(added);
     } catch (error) {
         return res.status(401).send(error);
     }

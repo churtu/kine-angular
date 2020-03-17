@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { TypeUserService } from '../../services/type-user.service';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-new-user',
@@ -10,9 +19,54 @@ import { Router } from '@angular/router';
 })
 export class NewUserComponent implements OnInit {
 
+  rutFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  ageFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\d*$/)
+  ]);
+
+  firstNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  middleNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  lastNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  middleLastNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email
+  ]);
+
+  phoneFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  addressFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  specializationFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+
+  matcher = new MyErrorStateMatcher();
+
   private user = {
     rut: '',
-    age: 0,
+    age: '',
     firstName: '',
     middleName: '',
     lastName: '',
@@ -54,7 +108,7 @@ export class NewUserComponent implements OnInit {
   validateForm() {
     let isValid = true;
     if (this.user.rut == '') { isValid = false; this.errors.push('- Rut'); }
-    if (this.user.age == 0) { isValid = false; this.errors.push('- Edad'); }
+    if (this.user.age == '') { isValid = false; this.errors.push('- Edad'); }
     if (this.user.firstName == '') { isValid = false; this.errors.push('- Nombre'); }
     if (this.user.middleName == '') { isValid = false; this.errors.push('- Segundo nombre'); }
     if (this.user.lastName == '') { isValid = false; this.errors.push('- Apellido'); }
@@ -87,6 +141,7 @@ export class NewUserComponent implements OnInit {
   createUser() {
     this.usersService.addUser(this.user).subscribe(
       res => {
+        localStorage.setItem('username', res.firstName +' '+ res.middleName +' '+ res.lastName +' '+ res.middleLastName);
         this.kine_data.kine_fk=res._id;
         this.usersService.addKine_data(this.kine_data).subscribe(
           res => {
@@ -111,6 +166,8 @@ export class NewUserComponent implements OnInit {
     this.errors = [];
   }
 
-  
+  setGender(arg){
+    this.user.gender = arg;
+  }
 
 }

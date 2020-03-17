@@ -1,6 +1,17 @@
+import { CommunicationService } from './../../services/communication.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-signin',
@@ -9,7 +20,18 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
+  // Validaciones campo requerido
+  userNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
 
+  passwordFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  matcher = new MyErrorStateMatcher();
+
+  // Inicializar propiedades
   private login = {
     username: '',
     password: ''
@@ -22,7 +44,8 @@ export class SigninComponent implements OnInit {
   haveuser = false;
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private communicationService: CommunicationService
 
   ) { }
 
@@ -45,6 +68,7 @@ export class SigninComponent implements OnInit {
         res => {
           localStorage.setItem('token', res.token);
           if (res.user) {
+            localStorage.setItem('username', res.user.firstName + ' ' + res.user.middleName + ' ' + res.user.lastName + ' ' + res.user.middleLastName);
             this.haveuser = true;
           }
           this.successDisplay = 'block';
@@ -75,4 +99,5 @@ export class SigninComponent implements OnInit {
   closeSuccess() {
     this.successDisplay = 'none';
   }
+
 }

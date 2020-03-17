@@ -1,12 +1,114 @@
 <div class="card">
     <div class="card-header">
-        <h3><i class="fas fa-calendar-alt"></i> Agendamiento de pacientes</h3>
+        <div class="row justify-items-between">
+            <div class="col-11">
+                <h3>Agenda de - {{username}} </h3>
+            </div>
+            <div class="col-1">
+                <i class="fas fa-calendar-alt fa-2x"></i>
+            </div>
+        </div>
+        
     </div>
     <div class="card-body">
-        <full-calendar [plugins]="calendarPlugins"
-        [locales]="locales"
-        locale="es"
-      (dateClick)="handleDateClick($event)"></full-calendar>
+        <full-calendar 
+            [plugins]="calendarPlugins"
+            [locales]="locales"
+            locale="es"
+            (dateClick)="dateClick($event)"
+            [events]="calendarEvents"
+            defaultView="dayGridMonth">
+        </full-calendar>
     </div>
 </div>
 
+<!--MODAL SESSION-->
+<div class="backdrop" [ngStyle]="{'display':sessionDisplay}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':sessionDisplay}" id="success-modal" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center font-18">
+        <h3 class="mb-20">Agendar sesiones</h3>
+        <div class="mb-30 text-center"><i class="far fa-calendar-check fa-4x"></i></div>
+        Debe agendar <strong>{{communicationService.sessions}} sesiones</strong> para este paciente.
+      </div>
+      <div class="modal-footer container">
+        <div class="row">
+          <div class="col-md-auto">
+            <button type="button" class="raise btn btn-smoke" (click)="closeSessionModal()"><i
+                class="fas fa-calendar-plus"></i> Ver agenda</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DATE CLICK MODAL -->
+<div class="backdrop" [ngStyle]="{'display':dateModal}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':dateModal}" id="exampleModalScrollable" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-bookmark"></i> Agenda del día
+          {{dateClicked}}</h5>
+        <button type="button" class="close" (click)="closeDateModal()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group" style="width: auto;" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-dark" aria-controls="home">
+              <h6>Pacientes del día:</h6>
+            </a>
+            <a *ngFor="let row of dayEvents" class="list-group-item list-group-item-action list-group-item-warning"
+              id="list-profile-list" data-toggle="list" href="#" role="tab" aria-controls="profile">
+              <strong>{{row.patient[0].firstName}} {{row.patient[0].lastName}} {{row.patient[0].middleLastName}}</strong></a>
+            <a *ngIf="dayEvents.length<1" (click)="getAgendaHour('T17:00:00')"
+              class="list-group-item list-group-item-action" href="#" data-toggle="list" role="tab">
+              <h6>Bloque 1 - 17:00 hrs</h6>
+            </a>
+            <a *ngIf="dayEvents.length<2" (click)="getAgendaHour('T18:00:00')"
+              class="list-group-item list-group-item-action" href="#" data-toggle="list" role="tab">
+              <h6>Bloque 2 - 18:00 hrs</h6>
+            </a>
+            <a *ngIf="dayEvents.length<3" (click)="getAgendaHour('T19:00:00')"
+              class="list-group-item list-group-item-action" href="#" data-toggle="list" role="tab">
+              <h6>Bloque 3 - 19:00 hrs</h6>
+            </a>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="sky btn btn-smoke" data-dismiss="modal" (click)="closeDateModal()"><i
+            class="fas fa-arrow-alt-circle-left"></i> Cancelar</button>
+        <button type="submit" (click)="addAgenda()" class="raise btn btn-smoke"><i class="fas fa-save"></i> Agendar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--SUCCESS MODAL-->
+<div class="backdrop" [ngStyle]="{'display':doneSessionsDisplay}"></div>
+<div class="modal animated fadeInDown" [ngStyle]="{'display':doneSessionsDisplay}" id="success-modal" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center font-18">
+        <h3 class="mb-20">Agendas listas</h3>
+        <div class="mb-30 text-center"><i class="far fa-check-circle fa-3x"></i></div>
+        Este paciente ya tiene todas sus sesiones agendadas.
+      </div>
+      <div class="modal-footer container">
+        <div class="row">
+          <div class="col-auto">
+            <button type="button" class="sky btn btn-smoke" (click)="closeDoneModal()"><i class="fas fa-home"></i>
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

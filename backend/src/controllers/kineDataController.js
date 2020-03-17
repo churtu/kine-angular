@@ -1,5 +1,7 @@
-controller = {}
 const { KineData } = require('../models');
+const { ObjectId } = require('mongoose').Types;
+controller = {}
+
 
 controller.addKineData = async (req, res) => {
     try {
@@ -13,8 +15,24 @@ controller.addKineData = async (req, res) => {
 
 controller.getAllKineDatas = async (req, res) => {
     try {
-        const data = await KineData.find();
-        console.log(data);
+        const data = await KineData.aggregate([
+            {
+                $lookup:{
+                    from: 'specializations',
+                    localField: 'specialization_fk',
+                    foreignField: '_id',
+                    as: 'specialization'
+                }
+            },
+            {
+                $lookup:{
+                    from: 'users',
+                    localField: 'kine_fk',
+                    foreignField: '_id',
+                    as: 'kine'
+                }
+            }
+        ]);
         return res.status(200).json(data);
     } catch (error) {
         return res.status(401).send(error);
@@ -23,9 +41,32 @@ controller.getAllKineDatas = async (req, res) => {
 
 controller.getKineDataByUserId = async (req, res) => {
     try {
-        const data = await KineData.findOne({kine_fk:req.params.id});
+        const data = await KineData.aggregate([
+            {
+                $match:{
+                    kine_fk: ObjectId(req.params.id)
+                }
+            },
+            {
+                $lookup:{
+                    from: 'specializations',
+                    localField: 'specialization_fk',
+                    foreignField: '_id',
+                    as: 'specialization'
+                }
+            },
+            {
+                $lookup:{
+                    from: 'users',
+                    localField: 'kine_fk',
+                    foreignField: '_id',
+                    as: 'kine'
+                }
+            }
+        ]);
         return res.status(200).json(data);
     } catch (error) {
+        console.log(error)
         return res.status(401).send(error);
     }
 }

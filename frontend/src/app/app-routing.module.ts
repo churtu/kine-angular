@@ -9,7 +9,8 @@ import { HomeComponent } from './components/home/home.component';
 import { EvaluationComponent } from './components/evaluation/evaluation.component';
 import { MedicalCareComponent } from './components/medical-care/medical-care.component';
 import { MyPatientsComponent } from './components/my-patients/my-patients.component';
-import {ScheduleComponent} from './components/schedule/schedule.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { AgendaEvaluationComponent } from './components/agenda-evaluation/agenda-evaluation.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: 'schedule',
     component: ScheduleComponent
+  },
+  {
+    path: 'agenda-evaluation',
+    component: AgendaEvaluationComponent
   }
 ];
 

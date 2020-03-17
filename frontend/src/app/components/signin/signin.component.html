@@ -1,13 +1,15 @@
-<div class="row">
+<div class="row pb-5">
   <div class="card mx-auto">
     <div class="card-body">
-      <form (submit)="onSubmit()">
+      <form (submit)="onSubmit()" class="text-center">
         <div class="form-group text-center">
-          <h1>Bienvenido!</h1>
           <i class="fas fa-user-circle fa-8x"></i>
+          <h1>Bienvenido!</h1>
+          
         </div>
         <div class="form-group">
-          <div class="input-group flex-nowrap">
+          <!--
+ <div class="input-group flex-nowrap">
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">
                 <i class="fas fa-user"></i>
@@ -16,9 +18,21 @@
             <input [(ngModel)]="login.username" name="username" type="text" class="form-control" placeholder="Username"
               aria-label="Username" aria-describedby="addon-wrapping">
           </div>
+          -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre de usuario</mat-label>
+            <input type="text" maxlength="15" matInput [formControl]="userNameFormControl" [errorStateMatcher]="matcher"
+              placeholder="Ex. j.rivera" [(ngModel)]="login.username" name="username">
+            <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+            <mat-error *ngIf="userNameFormControl.hasError('required')">
+              Nombre de usuario es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+
         </div>
         <div class="form-group">
-          <div class="input-group flex-nowrap">
+          <!--
+<div class="input-group flex-nowrap">
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">
                 <i class="fas fa-key"></i>
@@ -27,6 +41,16 @@
             <input [(ngModel)]="login.password" name="password" type="password" class="form-control"
               placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
           </div>
+          -->
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" maxlength="15" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+              placeholder="Ingresa tu password" [(ngModel)]="login.password" name="password">
+            <mat-icon matSuffix><i class="fas fa-key"></i></mat-icon>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Password es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
         </div>
         <hr>
         <div class="row align-items-center">
@@ -76,7 +100,8 @@
         </h6>
         <div class="row pt-4 justify-content-center">
           <div class="col">
-            <button type="button" class="smoke btn btn-smoke" (click)="closeAlert()"><i class="fas fa-undo"></i> Volver</button>
+            <button type="button" class="smoke btn btn-smoke" (click)="closeAlert()"><i class="fas fa-undo"></i>
+              Volver</button>
 
           </div>
         </div>

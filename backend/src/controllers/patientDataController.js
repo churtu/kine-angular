@@ -1,5 +1,5 @@
 controller = {}
-const { Patient_Data } = require('../models');
+const { Patient_Data, Agenda } = require('../models');
 const {ObjectId} = require('mongoose').Types;
 
 controller.addPatientData = async (req, res) => {
@@ -41,7 +41,7 @@ controller.deletePatientData = async (req, res) => {
 
 controller.getPatientDataByUserId = async (req, res) => {
     try {
-        const data = await Patient_Data.find({user_fk: req.params.id});
+        const data = await Patient_Data.findOne({patient_fk: req.params.id});
         return res.status(200).json(data);
     } catch (error) {
         return res.status(401).send(error);
@@ -53,19 +53,18 @@ controller.getDiagnosticByPatientId = async (req, res) => {
         const data = await Patient_Data.aggregate([
             {
                 $match:{
-                    user_fk: ObjectId(req.params.id)
+                    patient_fk:ObjectId(req.params.id)
                 }
             },
             {
                 $lookup:{
                     from:'treatments',
-                    localField: '_id',
-                    foreignField: 'patient_data_fk',
-                    as: 'treatment'
-                },
+                    localField:'_id',
+                    foreignField:'patient_data_fk',
+                    as:'treatment'
+                }
             }
         ])
-        console.log(data);
         return res.status(200).json(data);
     } catch (error) {
         console.log(error)
@@ -73,5 +72,13 @@ controller.getDiagnosticByPatientId = async (req, res) => {
     }
 }
 
+controller.getPatientsByKineId = async (req, res) => {
+    try {
+        const data = await Agenda.distinct("patient_fk",{kine_fk:ObjectId(req.params.id)});
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(401).send(error);
+    }
+}
 
 module.exports=controller;

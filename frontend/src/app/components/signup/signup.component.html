@@ -1,13 +1,15 @@
 <div class="row">
   <div class="card mx-auto">
     <div class="card-body">
-      <form (submit)="onSubmit()">
+      <form class="text-center" (submit)="onSubmit()">
         <div class="form-group text-center">
-          <h1>Bienvenido! Crea tu cuenta</h1>
           <i class="fas fa-user-plus fa-8x"></i>
+          <h1>Bienvenido! Crea tu cuenta</h1>
+          <hr class="pb-2">
         </div>
-        <div class="form-group">
-          <div class="input-group flex-nowrap">
+        <div class="form-group pt-2">
+          <!--
+            <div class="input-group flex-nowrap">
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">
                 <i class="fas fa-user"></i>
@@ -16,9 +18,20 @@
             <input [(ngModel)]="login.username" name="username" type="text" class="form-control" placeholder="Username"
               aria-label="Username" aria-describedby="addon-wrapping" required>
           </div>
+          -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre de usuario</mat-label>
+            <input type="text" maxlength="15" matInput [formControl]="userNameFormControl" [errorStateMatcher]="matcher"
+              placeholder="Ex. j.rivera" [(ngModel)]="login.username" name="username">
+            <mat-icon matSuffix><i class="fas fa-user"></i></mat-icon>
+            <mat-error *ngIf="userNameFormControl.hasError('required')">
+              Nombre de usuario es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
         </div>
         <div class="form-group">
-          <div class="input-group flex-nowrap">
+          <!--
+<div class="input-group flex-nowrap">
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">
                 <i class="fas fa-key"></i>
@@ -27,8 +40,18 @@
             <input [(ngModel)]="login.password" name="password" type="password" class="form-control"
               placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" required>
           </div>
+          -->
+          <mat-form-field appearance="outline">
+            <mat-label>Crea tu password</mat-label>
+            <input type="password" maxlength="15" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+              placeholder="Ingresar password" [(ngModel)]="login.password" name="password">
+            <mat-icon matSuffix><i class="fas fa-key"></i></mat-icon>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Password es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
         </div>
-        <div class="form-group">
+        <!--
           <div class="input-group flex-nowrap">
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">
@@ -38,6 +61,17 @@
             <input [(ngModel)]="login.confirmPassword" name="confirmPassword" type="password" class="form-control"
               placeholder="Confirm password" aria-label="confirmPassword" aria-describedby="addon-wrapping" required>
           </div>
+        -->
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Confirmar password</mat-label>
+            <input type="password" maxlength="15" matInput [formControl]="confirmPasswordFormControl" [errorStateMatcher]="matcher"
+              placeholder="Confirma tu password" [(ngModel)]="login.confirmPassword" name="confirmPassword">
+            <mat-icon matSuffix><i class="fas fa-key"></i></mat-icon>
+            <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+              Porfavor, <strong>confirma tu password</strong>
+            </mat-error>
+          </mat-form-field>
         </div>
         <hr>
         <div class="row align-items-center">
@@ -62,12 +96,12 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body text-center font-18">
-        <h3 class="mb-20">Success!!</h3>
+        <h3 class="mb-20">Correcto!!</h3>
         <div class="mb-30 text-center"><img src="../../../assets/success.png"></div>
         Felicitaciones! En el siguiente paso, deberás ingresar tus datos personales.
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn-hover color-9" (click)="closeSuccess()" routerLink="/newUser">Siguiente paso
+        <button type="button" class="sky btn btn-smoke" (click)="closeSuccess()" routerLink="/newUser">Siguiente paso
           ></button>
       </div>
     </div>

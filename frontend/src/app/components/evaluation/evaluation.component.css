@@ -5,7 +5,16 @@
 .card{
   min-height: 100%;
 }
+.card-header{
+  min-height: 100%;
+}
+mat-form-field{
+  width: 100%;
+}
 
+.text-black{
+  color: black;
+}
 
 
 

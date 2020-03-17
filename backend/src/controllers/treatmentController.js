@@ -38,5 +38,14 @@ controller.deleteTreatment = async (req, res) => {
     }
 }
 
+controller.putTreatment = async (req, res) => {
+    try {
+        const data = await Treatment.findByIdAndUpdate(req.params.id, req.body);
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(401).send(error);
+    }
+}
+
 
 module.exports = controller;

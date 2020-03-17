@@ -1,3 +1,4 @@
+import { CommunicationService } from './../../services/communication.service';
 import { PatientService } from './../../services/patient.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
@@ -6,8 +7,10 @@ import { MatSort } from '@angular/material/sort';
 import { AgendaService } from '../../services/agenda.service';
 import { LoginService } from '../../services/login.service';
 import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
+  _id:string;
   Nombre: string;
   Rut: string;
   Genero: string;
@@ -18,9 +21,7 @@ export interface PeriodicElement {
 }
 
 
-let DATA: PeriodicElement[] = [
-
-]
+let DATA: PeriodicElement[] = []
 
 @Component({
   selector: 'app-my-patients',
@@ -36,9 +37,9 @@ let DATA: PeriodicElement[] = [
 })
 export class MyPatientsComponent implements OnInit {
   private user: PeriodicElement[];
-  displayedColumns = ['Nombre', 'Rut', 'Genero', 'Edad', 'Direccion', 'Telefono'];
+  displayedColumns = ['Nombre', 'Rut', 'Genero', 'Edad', 'Direccion', 'Telefono', 'Status', 'Options'];
   dataSource = new MatTableDataSource<PeriodicElement>();
-  @ViewChild(MatPaginator, null) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
 
@@ -46,15 +47,16 @@ export class MyPatientsComponent implements OnInit {
     private loginService: LoginService,
     private usersService: UsersService,
     private agendaService: AgendaService,
-    private PatientService: PatientService
+    private patientService: PatientService,
+    private router: Router,
+    private communicationService:CommunicationService
   ) { }
 
   ngOnInit() {
-    DATA=[];
-    this.getLoggedUser();
+    DATA = [];
+    this.getData();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
   }
 
   applyFilter(event: Event) {
@@ -62,39 +64,54 @@ export class MyPatientsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getLoggedUser() {
+  getData() {
     const { _id } = this.loginService.getLoginId();
     this.usersService.getUserByLoginId(_id).subscribe(
       res => {
         this.user = res;
-        this.getAgendasByKineId(res._id);
+        this.getPatientsByKineId(res._id);
       },
       err => console.log(err)
     );
   }
 
-  getAgendasByKineId(id) {
-    this.agendaService.getAllAgendasByKineId(id).subscribe(
+  getPatientsByKineId(id) {
+    this.patientService.getPatiensIdByKineId(id).subscribe(
       res => {
-        res.forEach(element => {
-          this.PatientService.getTreatmentsByPatientId(element.patient_fk).subscribe(
-            res => {
-              DATA.push({
-                Nombre: element.patient[0].firstName,
-                Rut: element.patient[0].rut,
-                Genero: element.patient[0].gender,
-                Edad: element.patient[0].age,
-                Direccion: element.patient[0].address,
-                Telefono: element.patient[0].phone,
-                Diagnostico: res[0].treatment[0].diagnostic
-              })
-              this.dataSource = new MatTableDataSource<PeriodicElement>(DATA);
+        res.forEach(patient_id => {
+          this.usersService.getUserById(patient_id).subscribe(
+            patient => {
+              this.patientService.getTreatmentsByPatientId(patient_id).subscribe(
+                res => {
+                  DATA.push({
+                    _id:patient._id,
+                    Nombre: patient.firstName,
+                    Edad: patient.age,
+                    Genero: patient.gender,
+                    Direccion: patient.address,
+                    Rut: patient.rut,
+                    Telefono: patient.phone,
+                    Diagnostico:res[0].treatment[0].diagnostic
+                  })
+                  this.dataSource = new MatTableDataSource<PeriodicElement>(DATA);
+                },
+                err => console.log(err)
+              )/*
+             
+              
+              console.log(DATA)*/
             },
             err => console.log(err)
-          );
+          )
         });
       },
       err => console.log(err)
     )
   }
+
+  redirect(arg) {
+    this.communicationService.patient_id=arg._id;
+    this.router.navigate(['/evaluation']);
+  }
+
 }

@@ -1,3 +1,4 @@
+import { LoginService } from './services/login.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,7 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
-  
+  isLogged:boolean;
+  constructor(
+    private loginService: LoginService
+  ){}
 
+  verifyLogin(){
+    this.isLogged=this.loginService.isLogged();
+  }
 }

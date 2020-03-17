@@ -1,3 +1,4 @@
+import { CommunicationService } from './../../services/communication.service';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { LoginService } from '../../services/login.service';
@@ -18,15 +19,22 @@ export class NavigationComponent implements OnInit {
   private confirmDisplay = 'none';
   private errors = [];
   haveuser = false;
-  public user = {};
+  public user = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    middleLastName: ''
+  };
   constructor(
     private userService: UsersService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    public communicationService: CommunicationService
   ) { }
-
+  username: string;
   ngOnInit() {
     this.nameDisplay = 'none';
-    this.confirmDisplay='none';
+    this.confirmDisplay = 'none';
+    this.showUserName();
   }
 
 
@@ -40,7 +48,9 @@ export class NavigationComponent implements OnInit {
       const { _id } = this.loginService.getLoginId();
       this.userService.getUserByLoginId(_id).subscribe(
         res => {
-          this.user = res;
+          if (res != null) {
+            this.user = res;
+          }
         },
         err => console.log(err)
       );
@@ -54,15 +64,20 @@ export class NavigationComponent implements OnInit {
   }
 
   cleanUser() {
-    this.user = {}
-    this.nameDisplay='none';
+    this.user = {
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      middleLastName: ''
+    }
+    this.nameDisplay = 'none';
   }
 
-  openConfirm(){
+  openConfirm() {
     this.confirmDisplay = 'block';
   }
-  closeConfirm(){
-this.confirmDisplay='none';
+  closeConfirm() {
+    this.confirmDisplay = 'none';
   }
 
 }
